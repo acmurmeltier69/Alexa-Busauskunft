@@ -77,7 +77,7 @@ Die entsprechenden Dateien wurden mit Hilfe des [myask](https://github.com/acmur
       
  - *'ASK_resources/inputgrammar.txt'* definiert in kompakter form (als vereinfachte Variante einer [BNF-Grammatik](https://de.wikipedia.org/wiki/Backus-Naur-Form)) die möglichen Eingabesätze.
  
-    Aus dieser kompakten Grammatik wird mit Hilfe des von *myask/myask_myask_utterancegen.py* eine Datei mit allen möglichen Formulierungen erzeugt, auf den en der Alexa Skill trainiert werden soll.
+    Aus dieser kompakten Grammatik wird mit Hilfe des von *myask/myask_myask_utterancegen.py* eine Datei mit allen möglichen Formulierungen erzeugt, auf denen der Alexa Skill trainiert werden soll.
 
 (Leider hat sich herausgestellt, dass ASK nur eine sehr begrenzte Zahl von "Sample Utterances" akzeptiert. Ich musste die Alternativen Formuliereungen (z.B. Verben) wieder reduzieren. ) 
      
