@@ -1,1 +1,21 @@
-ToDO
+ToDo Items for Alexa-Busauskunft skill
+======================================
+
+ - correct non-ASCII characters in output
+   - ssml
+   - card
+      - slots
+      - text
+   - debug messages
+    
+ - fix "stadteinwärts" / "stadtauswärts" for all stations
+ 
+ - treat {Transport} slot as filter to searches
+
+ - treat {Next} slot to define which results are read back to user
+
+ - remove debug output for online version
+
+ - allow "city" as destination --> choose default stop for bus/train
+ 
+ - generic inbound/outbound behavior

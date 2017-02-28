@@ -12,7 +12,7 @@ CONST_CREATE_SAMPLES  = 5
 
 NUM_RANDOM = 1
 TESTINTENTS = ['*']
-BASEDIR = "C:/Users/Andreas_Kellner/_MY_DATA/AlexaSkill/git/ASEAG/"
+BASEDIR = "C:/Users/Andreas_Kellner/_MY_DATA/AlexaSkill/git/Alexa-Busauskunft/"
 TEST_DIR = BASEDIR + "test_events/"
 TESTFILE_BATCH = "TestList2.csv"
 TESTFILE_SINGLE = "T2_bug_decline_change_station.js"

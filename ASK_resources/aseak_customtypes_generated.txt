@@ -1,0 +1,1160 @@
+
+--- MODIFIER_NEXT ---
+der
+die
+ein
+eine
+irgendein
+irgendeine
+der nächste
+die nächste
+die nächsten fünf
+
+--- LIST_OF_STATIONS ---
+bushof
+aachen bushof
+bushof aachen
+elisenbrunnen
+aachen elisenbrunnen
+elisenbrunnen aachen
+hansemannplatz
+kaiserplatz
+hauptbahnhof
+aachen hauptbahnhof
+hauptbahnhof aachen
+ponttor
+ehrenmal lousberg
+eurogress
+augustastraße
+normaluhr
+technologiepark
+kohlscheid technologiepark
+technologiepark kohlscheid
+asa-haltestelle / fgi-haltestelle
+aseag
+gartenstraße
+goethestraße
+rolandstraße
+schillerstraße
+schwarzer weg
+vogelsang
+waldfriedhof
+waldschenke
+weststraße
+abzweig bourheim
+abzweig venwegen
+abzweigung orsbach
+adele-weidtman-straße
+adenauerallee
+akazienhain
+akazienstraße
+albert-schweitzer-straße
+albert-einstein-straße
+aldenhoven industriestraße
+aldenhoven jülicher straße
+aldenhoven kapelle
+aldenhoven kirche
+aldenhoven markt
+allensteiner straße
+alsdregex gewerbepark
+alsdorf annapark
+alsdorf gesamtschule
+alsdorf herzogenrather straße
+alsdorf im brühl
+alsdorf lindenplatz
+alsdorf rathaus
+alsdorf saarstraße
+alsdorf siedlung ost
+alsdorf weiher
+alsdorf zopp
+alt boscheln
+alt-breinig
+alt-merkstein
+alt-ofden anfang
+alt-ofden ende
+alt-ofden mitte
+alte post
+alte rodung
+altenbau
+alter bahnhof
+alter posthof
+alter tivoli
+altes zollhaus
+am backes
+am beulardstein
+am burgfeld
+am friedrich
+am ginsterbusch
+am gut wolf
+am haarberg
+am hang
+am haselbusch
+am hillenberg
+am hochhaus
+am hügel
+am klosterweiher
+am kreuzberg
+am lindchen
+am merzbach
+am neuen markt
+am neuenhof
+am otterbach
+am rodelberg
+am rott
+am römerberg
+am schildchen
+am sender
+am südhang
+am tiergarten
+am tunnel
+am wacholder
+am waldring
+am weißenberg
+am wimblech
+amstelbach
+an speenbruch
+an den weihern
+an der herrenstraß
+an der kante
+anemonenweg
+anna i
+anna ii
+anna-klöcker-straße
+annastraße
+apolloniaweg
+ardennenstraße
+atsch dreieck
+atsch kirche
+atsch nordstraße
+atsch schule
+audimax
+auerbachstraße
+auestraße
+auf dem bahnes
+auf dem kick
+auf dem pesch
+auf der gallich
+auf der geiss
+auf der hörn
+auf'm kutsch
+auf'm schif
+august-schmidt-platz
+augustinerweg
+autobahn
+bachstraße
+baesweiler gymnasium
+baesweiler im brühl
+baesweiler jülicher straße
+baesweiler parkstraße
+baesweiler rathaus
+bahnhof rothe erde
+bahnhofstraße
+bahnstraße
+bahnübergang
+bank
+bank finkenstraße
+bank siedlung
+barbarakirche
+barbarastraße
+barbarossaplatz
+bardenberg krankenhaus
+bardenberg pley
+bastei
+bau
+baumgartsweg
+bauschenberg
+bautscherweg
+bayerhaus
+bayernallee
+begau auf der weide
+begau bahnübergang
+begau gartenstraße
+begau paulstraße
+begau siedlung
+beitel locht
+belven 60
+belven 96
+bendenstraße
+bendplatz
+berensberg
+berensberger straße
+bergrath kapelle
+bergrath schule
+bergscheid
+bergschlösschen
+berliner ring
+bernhardshammer
+beverau
+bierstraß
+bierstraß anfang
+bierstraß schule
+bildchen grenze
+bildchen zollamt
+bingen
+binsfeldhammer
+birk
+birkengang
+birkenweg
+bischofstraße
+bismarckturm
+bleijerheide grens
+bloemendal
+blücherplatz
+bocholtzer straße
+bohl
+boscheler berg
+botz
+bourheim ortsmitte
+bradleystraat
+brahmsstraße
+brand
+brand hermann-löns-straße
+brand ringstraße
+brand schulzentrum
+brand schwimmhalle
+brander feld
+brander heide
+brandweiher
+brauereistraße
+breinig bahnhof
+breinig denkmal
+breinig kirche
+breinig siedlung
+breinigerberg
+breinigerberg waldschenke
+breinigerheide
+breitbenden
+breslauer straße
+brockenberg
+broich gymnasium
+broichhausen
+brunnenweg
+brückenkopfpark
+brückweg
+brünestraße
+brüsseler ring
+burtscheid
+busch bahnhof
+buschhausen
+buschhof
+buschmühle
+buschmühle friedh.
+buschstraße
+business center
+büchel
+bürgerhaus
+bürgermeisteramt
+büsbach aachener straße
+büsbach friedhof
+büsbach kirche
+büsbach markt
+büsbacher berg
+c.-magnus-allee
+cap kreisverkehr
+campus melaten
+carl-zeiss-straße
+carlalexanderpark
+carlo-schmid-straße
+carolus thermen
+casinopark
+cockerillstraße
+colynshof
+continental
+couven-gymnasium
+crombacherstraat
+daensstraße
+dahlienweg
+dammstraße
+danziger straße
+de lange akker
+de thun
+de-gasperi-straße
+debyestraße
+dechant-brock-straße
+dellstraße
+denkmalplatz
+depot sadar
+derichsberg
+dienstleistungsztr
+diepenbenden
+diepenlinchen
+diepenlinchen industriestraße
+distelweg
+donnerberg kirche
+dorff
+douvenrade
+dr. ackensplein
+dresdener straße
+driesch
+driescher gässchen
+drimborn
+drischer straße
+drosselweg
+duffenter
+dürwiß
+dürwiß festhalle
+dürwiß friedhof
+dürwiß jülicher straße
+dürwiß kirche
+dürwiß schule
+düserhofstraße
+e w v
+e.-brändström-straße
+ebertstraße
+eckenerstraße
+eich
+eilendorf bahnhof
+eilendorf karlstraße
+eilendorf linde
+eilendorf markt
+eilendorf rathaus
+eilendorfer straße
+eisenbahnstraße
+eisenbahnweg
+eisenhütte
+elektrowerk
+elgermühle
+elleter feld
+elsassstraße
+endstraße
+entengasse
+entenpfuhler weg
+entenweg
+erberichshofstraße
+erlenpütz
+erlöserkirche
+ernst-abbe-straße 13
+ernst-abbe-straße 34
+eschweiler friedhof
+eschweiler glücksburg
+eschweiler burgstraße
+eschweiler bushof
+eschweiler gartenstraße
+eschweiler hauptbahnhof
+eschweiler karlstraße
+eschweiler krankenhaus
+eschweiler marienstraße
+eschweiler schwimmhalle
+eschweiler waldfriedhof
+eschweiler waldstraße
+euchen
+eulersweg
+eupen bahnhof
+eupen bushof
+europadorf
+europaplatz
+evang. kirche
+eygelshovener straße
+eynatten depot
+eynatten dorf
+eynatten loos
+eynatten vogelsang
+eynattener feld
+eynattener heide
+eynattener mühle
+farmweg
+feldchen
+feldenendstraße
+feldstraße
+ferberberg
+feuerwehrhaus
+fidelisstraße
+finkensief
+fischbachstraße
+flats
+fleuth
+floriansdorf
+forckenbeckstraße
+forensberger straße
+forster linde
+forster weg
+forsterheide
+forsterheide kreuz
+forsthaus
+forstheider straße
+forsths. bovenberg
+fourne
+frankenberg
+frankenplatz
+franziskushospital
+franzosenkreuz
+franzstraße
+freibad
+freizeitgelände
+freizeitpark
+frepert
+freund
+freunder straße
+friedrichstraße
+friesenrath
+fringsgraben
+fronhofstraße
+fuchserde
+fuchskaul
+g.-scholl-gymn.
+gartengasse
+gaßmühle
+geilenk. straße
+getenberg
+gew. schlottfeld
+gewerbegebiet
+gewerbegebiet ost
+gierstraße
+gillesbachtal
+ginsterweg
+giselastraße
+glatzer straße
+goepelschacht
+goerdelerstraße
+goertzbrunnstraße
+goldbachstraße
+gouleystraße
+grabenstraße
+gracht
+gracht kerk
+grachtstraße
+greifswalder straße
+gressenich kapelle
+gressenich kirche
+gressenich schule
+grindelstraße
+grossenbusch
+großheidstraße
+grundhaus
+grüne eiche
+grüner weg
+grüner winkel
+grünstraße
+gut forensberg
+gut grauenhof
+gut luft
+gut neuenhof
+gut nonnenhof
+gut orth
+gut weide
+gut-knapp-straße
+gutenbergstraße
+h.-hollerith-straße
+haaren denkmal
+haaren markt
+habsburgerallee
+hagfeld
+hahn kirche
+hahnenkreuz
+hahnweg
+hainbuchenstraße
+halifaxstraße
+hander weg
+hansmannstraße
+hasbach
+hasencleverstraße
+hasenwaldstraße
+hassenberg
+hastenrath kirche
+hastenrath schwarzer weg
+hastenrather straße
+hattich
+hauptstraße
+haus linde
+haus worm
+hauset brücke
+hauset heide
+hauset kapelle
+hauset kirche
+heerlen station
+heerlerbaan kerk
+heidbenden
+heidestraße
+heinrich-heine-straße
+heinrichstraße
+heistern
+heistern friedhof
+heißberg
+helenasruh
+henry dunantstraße
+herbach feld
+hergenrather weg
+herz-jesu-kirche
+herz. schulzentrum
+herz. waldfriedhof
+herzogenrath bahnhof
+herzogenrath. rathaus
+herzogenrath aachener straße
+herzogenrath burgstraße
+heussstraße
+heuvel
+heydenstraße
+hickelweg
+hitfeld
+hitzberg
+hochgrundhaus
+hochhausring
+hochstraße
+hochwegerhof
+hoengen altenheim
+hoengen goethestraße
+hoengen hans-böckler-straße
+hoengen kirche
+hoengen marienstraße
+hoengen markt
+hoengen schillerstraße
+hof bohr
+hofstadt anfang
+hofstadt ende
+hofstadt wende
+hogeschool zuyd
+hoheneichstraße
+hohenzollernplatz
+holbeinstraße
+holthausen
+honold
+horbach
+horbach kirche
+horbach linde
+hostetstraße
+hotel roeb
+hubertusstraße
+hundskaulweg
+häuser jüd
+höhenstraße
+hörn brücke
+hörnstieg
+hüchelner straße
+hüls
+hüls friedhof
+hüls gewerbegebiet
+hüls schulzentrum
+iga cinram
+im boisch
+im brockenfeld
+im brühl kirche
+im rehgrund
+im reichswald
+im straßer feld
+im weinkeller
+imgenbroich bushof
+immeln
+in der krause
+in der schaf
+ind-geb.bosch.berg
+industriepark
+insel
+iternberg
+jahnplatz
+jakobsplatz
+josefskirche
+josefstraße
+jupp-müller-straße
+juttastraße
+jägersfahrt
+jüdischer friedhof
+jülich bahnhof/zob
+jülich city
+k.-friedrich-park
+kackertstraße
+kaisersruh
+kaiserstraße
+kambach
+kamper gracht
+kaninsberg
+kapellenfeldchen
+kapitelstraße
+karl-arnold-straße
+karlsgraben
+karman-auditorium
+karolingerstraße
+kaserne donnerberg
+kastanienweg
+kellersberg broicher straße
+kellershaustraße
+kelmesberg
+kelmesbergweg
+kelmis bbl
+kelmis bruch
+kelmis friedhof
+keltenstraße
+kennedypark
+kerkr. busstation
+kerkrade station
+kesselstraße
+kettenis dorf
+kettenis tal
+kiefernweg
+kinzweiler burg
+kiosk
+kirchberg
+kircheich
+kircheichstraße
+kirchfeld
+kirschbäumchen
+klause
+kleikstraße
+klinkheide
+kloshaus
+klosterstraße
+knippmühle
+knoppenburg
+kohlberg
+kohlbusch spielplatz
+kohlscheid altes rathaus
+kohlscheid bahnhof
+kohlscheid markt
+kohlscheid nordstraße
+kohlscheid rolandstraße
+kohlscheid weststraße
+kohlshof
+kollenbruch
+kolpingstraße
+konrad-zuse-straße
+korenstraat
+kornelimünster
+kraftwerke
+kranensterz
+krauth. siedlung
+krauthausen
+kreisaltenheim
+kreuzerdriesch
+krewinkel
+kroitzheider weg
+kronenberg
+kuckelkorn
+kullen
+kämpchen
+königreich
+königsbenden
+königsberger straße
+königstraße
+köpfchen alt.zoll
+köpfchen grenze
+lamersiefen
+landgraben
+landstraße
+langerweher straße
+langstraße
+langwahn
+laschet
+laurensb. rathaus
+laurensberg
+laurensberg kirche
+laurensberg schulzentrum
+laurentiusstraße
+lederfabrik
+lemiers
+lemiers weiher
+lennestraße
+liberme
+lichtenb. broich
+lichtenb. kirche
+lichtenbusch
+lichtenbuscher weg
+liebfrauenstraße
+liebigstraße
+liester
+liester hauptschule
+liester schulzentrum
+liester seniorenzentrum
+linden kirche
+linden ziegelei
+lindenallee
+linnicher straße
+lintert
+lintert friedhof
+linzenshäuschen
+lochnerstraße
+lohrstraße
+lombardenstraße
+loverich puffendorfer straße
+ludwig forum
+luisenhospital
+luisenstraße
+lukasstraße
+lynenwerk
+löwenstein-kaserne
+lütterbüschgen
+m.-theresia-allee
+maarstraße
+maastrichter straße
+maastrichterlaan
+magelspfad
+malmedyer straße
+marcel-breuer-straße
+maria-lipp-straße
+mariadorf altes rathaus
+mariadorf dreieck
+mariadorf kirche
+mariadorf kreuz
+mariagrube
+marie-juchacz-park
+marienhospital
+markt (judengasse)
+markusstraße
+marshallstraße
+martinusstraße
+matarestraße
+mauerfeldchen
+mauerstraße (dlz)
+mausbach kirche
+meischenfeld
+meisenweg
+melatener straße
+merkstein eintrachtstraße
+merkstein floeßer straße
+merkstein gesamtschule
+merkstein goethestraße
+merkstein humboldtstraße
+merkstein seniorenzentrum
+merkurstraße
+merols
+merzbrück abzw.
+metro
+mies-v-d-rohe-straße
+minoritenstraße
+misereor
+mitterrandstraße
+mommertzhäuschen
+montanstraße
+montzener straße
+morsbach
+mozartstraße
+muffet
+mühlenbachstraße
+mühlener bahnhof
+mühlener brücke
+mühlenweg
+münsterb. friedhof
+münsterb. schule
+münsterbusch kreuz
+münsterbusch prämienstraße
+mütschenpfuhl
+nachtigällchen
+napoleonsberg
+naturfreundehaus
+nerscheider weg
+neu-linzensh.
+neu-lohn kirche
+neu-lohn ringstraße
+neudorf
+neue mitte
+neuenbau
+neues rathaus
+neuhaus
+neuhauser straße
+neumerberen
+neusen kreuz
+neustraße
+neuweiler
+niederbardenberg
+niederforstbach
+niederm. ortsmitte
+niedermerzer straße
+niersteiner höfe
+nikolausstraße
+nirmer platz
+noppenberg
+nordstern
+nordstraße
+nothberg kirche
+nothberg kreis
+nothberg kreuz
+nothberg platz
+nothberg siedlung
+nütheim
+o.-lilienthal-straße
+oberdorf
+oberforstb. schule
+oberforstbach
+ochsenstock
+odilienstr/hp.west
+ofden gymnasium
+oidtweiler kapelle
+orsbach schule
+oststraße
+palenberg bahnhof
+pannesheide
+pannesheide schule
+pannesstraße
+pannhauser straße
+parklaan
+parkstad stadion
+parkstraße
+pascalstraße
+patterner ring
+paulinenstraße
+paulusstraße
+peschstraat
+pestalozzistraße
+peter-paul-straße
+pfalzgrafenstraße
+pfeiferweg
+pferdegasse
+philipp-neri-weg
+philips
+pijnsweg
+pilgramsweg
+pius-gymnasium
+place de montesson
+pley
+plitschard dorf
+plitschard friedhof
+plitschard siedlung
+polizeipräsidium
+pommernstraße
+pongs
+poststraße
+prager ring
+preuswald
+preusweg
+preyerstraße
+pricksteenweg
+prof. lambertstraße
+puffendorf van roy
+puffendorf von ameln
+pumpe
+pumpstation
+purweider weg
+püngelerstraße
+pützgasse
+quellstraße
+quinx
+rwe-kraftwerk
+rabentalweg
+radermacher
+raerenpfad
+rahe
+rahe im ring
+randsiedlung
+rasthaus
+rathenauallee
+raths./city-center
+reimser straße
+reumontstraße
+reutershag
+reyplatz
+rheingold
+richterich kirche
+richterich parkstraße
+richterich rathaus
+rimburger acker
+ringofen
+ritterstraße
+ritzerfeld
+ritzerfeld siedl.
+roder weg
+roermonder straße
+rollefbachweg
+rollefer berg
+ronheide / j g h
+ronheider berg
+ronheider weg
+rosenhügel
+rosenquelle
+rosental
+rosenweg
+roskaul
+rothausstraße
+rothe gasse
+rottstraße
+rukker
+rumpen brücke
+rumpen schule
+rödgerbach
+röhe aachener straße
+röhe kirche
+röhe villa
+röhe wasserwerk
+römerplatz
+röthgener straße
+schumag
+stawag
+salmstraße
+sankt jobs
+schagenstraße
+schanz
+schaufenberg kirche
+schaufenberger straße
+scheibenstraße
+scherpenseel
+schevenh. kirche
+schießstand
+schl.-schönau-straße
+schlackstraße
+schleckheim kapelle
+schleckheim aachener straße
+aachener straße schleckheim 
+schleckheimer straße
+schleibacher hof
+schloss-rahe-straße
+schlossberg
+schlossstraße
+schmiedgasse
+schmithof kirche
+schmithof schule
+schmithofer straße
+schmittchen
+schneidmühle
+schnellenwind
+schnellewindgasse
+schubertstraße
+schulberg
+schummerstraat
+schwalbenweg
+schwan
+schwarzenbruch
+schwarzwaldstraße
+schweilbach
+schwester-zita-weg
+schwimmhalle west
+schönau
+schönauer friede
+schönauer hang
+schöne aussicht
+schönebergstraße
+schönforst
+schöntal
+schütz-v-rode-straße
+schützheide
+sebastianstraße
+sebastianusweg
+seffent
+seffenter weg
+senserbachweg
+setterich siedlung
+siebweg
+sief abzweigung
+sief schule
+siegel
+sint jozefkerk
+sittarder straße
+soers
+soers kloster
+soers schule
+soerser au
+soerser winkel
+solchbachtal
+sommerweg
+sonnenweg
+sperberweg
+sportp. dörenberg
+sportpark soers
+sportplatz krakau
+sankt johannes
+sankt jöris kirche
+sankt jöris schule
+sankt severin
+sankt vither straße
+stadion
+stadsschouwburg
+stadtgr(allmannsh)
+stadtwald
+stapperstraße
+stationsstraat 6
+staudenweg
+stegelstraße
+steinbergweg
+steinbruch
+steinbusch
+steinebrück
+steinfurt
+steinkaulplatz
+steinkaulweid
+steinkohlenfeld
+steinstraße
+steppenberg
+stich siedlung
+sticher berg
+stiewistraße
+stockemer straße
+stolberg altstadt
+stolberg friedhof
+stolberg friedrich-ebert-straße
+friedrich-ebert-straße stolberg
+stolberg hans-böckler-straße
+hans-böckler-straße stolberg
+stolberg hauptbahnhof
+hauptbahnhof stolberg
+stolberg krankenhaus
+stolberg krankenhaus (parkplatz)
+stolberg rathaus
+rathaus stolberg
+stolberg vogelsang
+stolberger straße
+stollenweg
+strangenhäuschen
+straß
+straßenverkehrsamt
+sägewerk
+südstraße
+süsterau
+süsterfeld
+talbahnhof
+talbot
+talstraße
+tannenallee
+tannenbergstraße
+techn. hochschule
+teeheide
+teichwinkel
+teuterhof
+theater
+thiergarten
+tichelbeekstraat
+tiefental
+tierpark
+tilsiter straße
+titfeld
+tittardshang
+tonbrennerstraße
+transvaal
+trierer platz
+tulpenweg
+turmstraße
+uersfeld
+ungarnplatz
+uniklinik
+unt. backertsweg
+urweg
+vaals busstation
+vaals grenze
+velau
+velauer berg
+vennbahn
+vennbahnbogen
+vennblick
+venskyhäuschen
+venwegener straße
+verlautenheide waldstraße
+vetschau
+vetschau schmiede
+vetschauer berg
+vetschauer weg
+viadukt
+vicht brücke
+vicht kirche
+vier jahreszeiten
+viktoriaallee
+vinzenzplatz
+volkenrath
+von-görschen-straße
+von-werner-straße
+voorterstraat
+vorweiden
+vöckelsberg
+waldschule
+waldschänke
+waldsiedlung
+walheim
+walheim friedhof
+walheim prämienstraße
+walhorner straße
+wallstraße
+walramplatz
+warden auf dem bungart
+warden feld
+warden kirche
+wasserfeld
+wehrstraße
+weiden kirche
+weiherstraße
+weiler-hausen
+weisweiler bahnhof
+weisweiler hermann-löns-straße
+weisweiler ziegelei
+weißer weg
+welkenrather straße
+wenau
+wenauer höfchen
+wendlingweg
+werk aue
+wersch
+werth kirche
+werth kreuzung
+werth markt
+werther heide
+westbahnhof
+westerwaldstraße
+westfriedhof
+wetterschacht
+wiesenstraße
+wiesental
+wilbank
+wildbach
+wildnis anfang
+wildnis ende
+wildnis zollhaus
+wilfried-könig-straße
+wilhelm-pitz-weg
+wilhelminenstraße
+wilhelmshöhe
+wilhelmstein
+willy-brandt-platz
+wilmersdorfer straße
+windmühle
+wingertsberg
+wolferskaul
+world trade center
+worm brücke
+worringer weg
+wurmtal
+würselen kirche
+würselen krankenhaus
+würselen markt
+würselen parkhotel
+würselen rathaus
+würselen ringstraße
+yorckstraße
+zandweg
+zechenstraße
+zentis
+zentralbetriebshof
+zeppelinstraße
+zieglerstraße
+zinkhütter hof
+zollamt tulje
+zollhaus
+zollmuseum
+zukunft
+zum hagelkreuz
+zuyderland mc
+zwanzigmorgen
+zweifall
+zweifall brücke
+zweifall kirche
+zweiweiherweg
+übach markt
+übach-palenberg finkenstraße
+übach-palenberg friedrich-ebert-straße
+überheide
+
+--- LIST_OF_DIRECTIONS ---
+stadteinwärts
+richtung stadt
+richtung innenstadt
+in die stadt
+richtung aachen
+richtung zentrum
+stadtauswärts
+
+--- LIST_OF_FAVORITE_CONNECTIONS ---
+der schulbus
+mein schulbus
+mein bus in die schule
+mein bus zur schule
+mein bus in die arbeit
+mein bus zur arbeit
+mein bus in die firma
+
+--- LIST_OF_TRANSPORT ---
+abfahrt
+abfahrten
+bus
+busabfahrt
+busabfahrten
+busverbindung
+busverbindungen
+zug
+bahn
+bahnverbindungen
+zugverbindungen
+schnellbus
+direktverbindung
+verbindung
