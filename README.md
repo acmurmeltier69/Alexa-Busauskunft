@@ -21,7 +21,8 @@ können Abfahrten und Verbindungen von dieser Haltestelle vereinfacht abgefragt 
 Unterstützte Kommandos (Intents):
  - **GetDeparturesFromFavorite** : Zeige Live-Abfahrtszeiten der Busse von der bevorzugten Haltestelle
  
-   Beispiele:
+Beispiele:
+   
 >  "Wann fährt der nächste Bus"
 
 >  "Wann geht der nächste Bus der Line 47"
@@ -30,28 +31,32 @@ Unterstützte Kommandos (Intents):
 
  - **GetDeparturesFromOther** :  Zeige Live-Abfahrtszeiten ab einer anderen Haltestelle
 
-   Beispiele:
+Beispiele:
+   
 >  "Wann fährt der nächste Bus ab Richterich Rathaus"
 
 >  "Zeige die Abfahrten die Linie 11 ab Elisenbrunnen"
 
  - **GetFavConnecionDepartures** : Suche Verbindungen von der bevorzugten Haltestelle zu anderen Zielen
 
-   Beispiele:
+Beispiele:
+   
 >  "Wann kommt der nächste Bus zum Hauptbahnhof"
 
 >  "Wann geht ein Bus in die Liebigstraße"
      
 - **FindConnectionFromOther** : Suche Verbindungen zwischen zwei beliebigen Haltestellen
 
-   Beispiele:
+Beispiele:
+
 >  "Wann geht der nächste Bus vom Ponttor zum Hauptbahnhof"
 
 >  "Wann geht ein Bus von Richterich rathaus in die Liebigstraße"
  
 - **ChangeDefaultStation** : Ändere die bevorzugte Haltestelle für den Benutzer
 
-   Beispiel:
+Beispiel:
+   
 >  "Ändere die_bevorzugte_haltestelle zu Kohlscheid Markt"
 
     Die bevorzugte Haltestelle für den benutzer wird anhand der Amazon UserID in einer DynamoDB Datenbank abgelegt
