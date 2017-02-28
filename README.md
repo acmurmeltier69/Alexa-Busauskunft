@@ -69,11 +69,16 @@ Die Informationen die das "Interaktionsmodell" des Alexa Skills benötigt liegen
 - Sample utterances --> sample_utterances_generated.txt
 
 Die entsprechenden Dateien wurden mit Hilfe des [myask](https://github.com/acmurmeltier69/myask.git) Tools *myask/myask_appdef.py* automatisch aus einem internen Datenmodell generiert:
+
  - *'python/bus_appdef.py'* definiert die Intents, Slots und Custom-Slot-Types für den Skill
     - Die Liste der ASEAG Bushaltestellen wird dabei aus "aseag_data.py" importiert
-    - verschiedene Formulierungen ("literal values") für den selben Slot-Wert ("canonical value") werden im Datenmodell zusammengefasst und bereits beim Einlesen der Slots (mit myask/myask_slots.py) umgewandelt.
+    - verschiedene Formulierungen ("literal values") für den selben Slot-Wert ("canonical value") werden im Datenmodell zusammengefasst.
+      Die von Alexa erkannten slot-Werte werden bereits beim Einlesen (mit myask/myask_slots.py) in die entsprechenden canonicals umgewandelt.
+      
  - *'ASK_resources/inputgrammar.txt'* definiert in kompakter form (als vereinfachte Variante einer [BNF-Grammatik](https://de.wikipedia.org/wiki/Backus-Naur-Form)) die möglichen Eingabesätze.
-    Aus dieser kompakten Grammatik wird mit Hilfe des [myask](https://github.com/acmurmeltier69/myask.git) Tools *myask/myask_myask_utterancegen.py* eine Datei mit allen möglichen Formulierungen erzeugt, auf den en der Alexa Skill trainiert werden soll.
-    
+ 
+    Aus dieser kompakten Grammatik wird mit Hilfe des von *myask/myask_myask_utterancegen.py* eine Datei mit allen möglichen Formulierungen erzeugt, auf den en der Alexa Skill trainiert werden soll.
+
+(Leider hat sich herausgestellt, dass ASK nur eine sehr begrenzte Zahl von "Sample Utterances" akzeptiert. Ich musste die Alternativen Formuliereungen (z.B. Verben) wieder reduzieren. ) 
      
     
