@@ -7,8 +7,8 @@ Siehe z.B http://content.tfl.gov.uk/tfl-live-bus-river-bus-arrivals-api-document
 
 ## Requires
 Der Skill benutztz die folgenden "externen" Pakete:
-- package "requests"
-- package "myask" from https://github.com/acmurmeltier69/myask.git
+-  "requests" (zur Vereinfachung der Anfragen an die ASEAG API) Siehe http://docs.python-requests.org/en/master/
+-  "myask"    (ein Paar kleine Helferchen, die ich für meine Alexa Skills geschrieben habe) Siehe https://github.com/acmurmeltier69/myask.git
 Diese Pakete müssen als Unterverzeichnisse eingebunden werden, wenn der Handler als aws Lambda hochgeladen wird.
 
 
@@ -62,4 +62,18 @@ Beispiel:
     Die bevorzugte Haltestelle für den benutzer wird anhand der Amazon UserID in einer DynamoDB Datenbank abgelegt
 
 
-- 
+# Datenmodell für Alexa
+Die Informationen die das "Interaktionsmodell" des Alexa Skills benötigt liegen im Verzeichnis "ASK_resources"
+- Intent structure --> aseak_intentstruct_generated.js
+- definition of custom types --> aseak_customtypes_generated.txt
+- Sample utterances --> sample_utterances_generated.txt
+
+Die entsprechenden Dateien wurden mit Hilfe des [myask](https://github.com/acmurmeltier69/myask.git) Tools *myask/myask_appdef.py* automatisch aus einem internen Datenmodell generiert:
+ - *'python/bus_appdef.py'* definiert die Intents, Slots und Custom-Slot-Types für den Skill
+    - Die Liste der ASEAG Bushaltestellen wird dabei aus "aseag_data.py" importiert
+    - verschiedene Formulierungen ("literal values") für den selben Slot-Wert ("canonical value") werden im Datenmodell zusammengefasst und bereits beim Einlesen der Slots (mit myask/myask_slots.py) umgewandelt.
+ - *'ASK_resources/inputgrammar.txt'* definiert in kompakter form (als vereinfachte Variante einer [BNF-Grammatik](https://de.wikipedia.org/wiki/Backus-Naur-Form)) die möglichen Eingabesätze.
+    Aus dieser kompakten Grammatik wird mit Hilfe des [myask](https://github.com/acmurmeltier69/myask.git) Tools *myask/myask_myask_utterancegen.py* eine Datei mit allen möglichen Formulierungen erzeugt, auf den en der Alexa Skill trainiert werden soll.
+    
+     
+    
