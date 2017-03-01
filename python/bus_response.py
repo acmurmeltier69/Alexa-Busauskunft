@@ -53,7 +53,8 @@ def out_SessionEnd():
     slots = {}
     slots['PrevIntent'] = 'End'
     out = myask_alexaout.alexaout()
-    out.card_title = bus_nlg.SessionEnd()
+    out.card_title = "SessionEnd"
+    out.speech_output = bus_nlg.SessionEnd()
     out.DisplaySpeechOutputOnCard()        
     return out.createOutput(slots)
 

@@ -9,8 +9,9 @@
 ###############################################################################
 
 
-from myask import myask_log, myask_slots, myask_appdef
+from myask import myask_log, myask_slots
 import re
+MAX_DISPLAY_CONNECTONS = 10
 
 def ShowAlexaSlots(slots, appdef):
     #--------------------------------------------------------------------------
@@ -55,9 +56,9 @@ def DisplayBusstopList(matches, slots, appdef):
 def DisplayDeparture(connection, slots, appdef):
     display_text = ""
     (dep_time, busnr, destination) = connection
-    display_text += "Ab "+ dep_time.strftime('%H:%M')
-    display_text += " Linie " + str(busnr) 
-    display_text += " --> " + unicode(destination.decode("unicode-escape")) +". \n"
+    display_text += u"Ab "+ dep_time.strftime('%H:%M')
+    display_text += u" Linie " + str(busnr) 
+    display_text += u" --> " + destination +u"\n"
     return display_text
 
 def ShowDepartureList(departure_list, slots, appdef):
@@ -75,17 +76,20 @@ def ShowDepartureList(departure_list, slots, appdef):
     display_text = ""
     num_departures = len(departure_list)
     if num_departures == 0:
-        display_text =  "Keine Abfahrten "
-        display_text += " ab " + appdef.GetSlotOutputName("Origin", slots['qorg_id'])+" ("+str(slots['qorg_id'])+")"
+        display_text =  u"Keine Abfahrten "
+        display_text += u" ab " + appdef.GetSlotOutputName("Origin", slots['qorg_id'])+u" ("+str(slots['qorg_id'])+u")"
         if 'Buslinie' in slots:
-            display_text += " für  Linie"+str(slots['Buslinie'])    
-        display_text += " gefunden."
+            display_text += u" für  Linie"+str(slots['Buslinie'])    
+        display_text += u" gefunden."
     else:
-        display_text =  str(num_departures) +" Abfahrt(en)"
-        display_text += " ab " + appdef.GetSlotOutputName("Origin", slots['qorg_id'])+" ("+str(slots['qorg_id'])+")"
-        display_text += " gefunden.\n"
-        for departure in departure_list:
-            display_text += DisplayDeparture(departure, slots, appdef)
+        display_text =  str(num_departures) +u" Abfahrt(en)"
+        display_text += u" ab " + appdef.GetSlotOutputName("Origin", slots['qorg_id'])+u" ("+str(slots['qorg_id'])+u")"
+        display_text += u" gefunden.\n"
+        if num_departures > MAX_DISPLAY_CONNECTONS: 
+            num_departures = MAX_DISPLAY_CONNECTONS
+            display_text += u"Hier sind die ersten "+str(num_departures)+u"\n"
+        for i in range(num_departures):
+            display_text += DisplayDeparture(departure_list[i], slots, appdef)
  
     return display_text
 

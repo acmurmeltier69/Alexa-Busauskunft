@@ -164,7 +164,7 @@ def SpeakLineDepartures(departure_list, slots, appdef):
         listcounter += 1
         (dep_time, busnr, destination) = departure
         speech_prompt += u" um " + dep_time.strftime('%H:%M')
-        speech_prompt += u" richtung " + unicode(destination.decode("unicode-escape")) +u". <break/>"
+        speech_prompt += u" richtung " + destination +u". <break/>"
         if listcounter == numconnections:
             speech_prompt += u" und "
             
@@ -175,7 +175,7 @@ def SpeakDeparture(connection, slots, appdef):
     speech_prompt = u""
     (dep_time, busnr, destination) = connection
     speech_prompt += u"Um " + dep_time.strftime('%H:%M')
-    speech_prompt += u" fährt die linie " + str(busnr) + u" richtung " + unicode(destination.decode("unicode-escape")) +u". <break/>"
+    speech_prompt += u" fährt die linie " + str(busnr) + u" richtung " + destination +u". <break/>"
     return speech_prompt
 
  

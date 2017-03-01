@@ -5,7 +5,7 @@
 #
 ###############################################################################
 # contains functions to retrieve data from ASEAG API
-#
+# Initial version was based on based  https://github.com/feuerrot/aseag-python
 #  
 ###############################################################################
 
@@ -22,13 +22,11 @@ url_l        = "location"
 url_j        = "journey"
 url_i        = "instant_V2"
 returnlist    = "StopPointName,StopID,StopPointState,StopPointIndicator,Latitude,Longitude,VisitNumber,TripID,VehicleID,LineID,LineName,DirectionID,DestinationName,DestinationText,EstimatedTime,BaseVersion"
-usage        = 'Usage: ./main [StopID/StopName] [BusID] ([BusID]…) +[MaxWait]'
-infotext    = "Haltestelle:    {}\nHaltestellenID: {}\nLinienfilter:   {}"
 
 totime = 0
 
 
-def MatchesDirection(station, direction, line, destination):
+def MatchesDirection(station_ID, direction, line, destination):
     #---------------------------------------------------------------------------
     # checks if a given connection matches the list of specified direction 
     #
@@ -44,7 +42,7 @@ def MatchesDirection(station, direction, line, destination):
     #---------------------------------------------------------------------------
     if direction == "": return True # if there's no direction, everything matches
 
-    key = str(station)
+    key = str(station_ID)
     if key in aseag_data.HARDCODED_DIRECTIONS:
         inwardlist = aseag_data.HARDCODED_DIRECTIONS[key]["inward"]
         outwardlist = aseag_data.HARDCODED_DIRECTIONS[key]["outward"]
@@ -58,41 +56,40 @@ def MatchesDirection(station, direction, line, destination):
         for (itemid, itemdest) in inwardlist:
             if destination == itemdest: # the destination is in the list
                 if itemid == 0 or itemid == busline: # the destination matches for all buses or the bus is the right one
-                    myask_log.debug(10, "Match: Found inbound match for station '"+key+"' Bus "+str(busline)+ ": "+destination)
+                    myask_log.debug(10, u"Match: Found inbound match for station '"+key+u"' Bus "+str(busline)+ ": "+destination)
                     return True    
         # negative list let's check if the item is in the outbound list
         for (itemid, itemdest) in outwardlist:
             if destination == itemdest: # the destination is in the list
                 if itemid == 0 or itemid == busline: # the destination matches for all buses or the bus is the right one
-                    myask_log.debug(10, "Mismatch: Found outbound match for station '"+key+"' Bus "+str(busline)+ ": "+destination)
+                    myask_log.debug(10, u"Mismatch: Found outbound match for station '"+key+u"' Bus "+str(busline)+ ": "+destination)
                     return False    
-        myask_log.debug(10, "Did not find in/out match for '"+key+"' Bus "+str(busline)+ ": "+destination)
+        myask_log.debug(10, u"Did not find in/out match for '"+key+u"' Bus "+str(busline)+ u": "+destination)
         return True
     elif  direction == "DIR_OUTWARD":
         # positive list: 
         for (itemid, itemdest) in outwardlist:
             if destination == itemdest: # the destination is in the list
                 if itemid == 0 or itemid == busline: # the destination matches for all buses or the bus is the right one
-                    myask_log.debug(10, "Match: Found outbound match for station '"+key+"' Bus "+str(busline)+ ": "+destination)
+                    myask_log.debug(10, u"Match: Found outbound match for station '"+key+u"' Bus "+str(busline)+ u": "+destination)
                     return True    
         # negative list let's check if the item is in the outbound list
         for (itemid, itemdest) in inwardlist:
             if destination == itemdest: # the destination is in the list
                 if itemid == 0 or itemid == busline: # the destination matches for all buses or the bus is the right one
-                    myask_log.debug(10, "Mismatch: Found inbound match for station '"+key+"' Bus "+str(busline)+ ": "+destination)
+                    myask_log.debug(10, u"Mismatch: Found inbound match for station '"+key+u"' Bus "+str(busline)+ u": "+destination)
                     return False    
-        myask_log.debug(10, "Did not find in/out match for '"+key+"' Bus "+str(busline)+ ": "+destination)
+        myask_log.debug(10, u"Did not find in/out match for '"+key+u"' Bus "+str(busline)+ ": "+destination)
         return True
     else:
-        myask_log.error("Invalid direction '"+str(direction) +"' found ignoring filter")
+        myask_log.error(u"Invalid direction '"+str(direction) +u"' found ignoring filter")
         return True
 
 
 def unicodify(aseag_str):
-    print("Translating String '"+aseag_str+"'")
-    textstr = aseag_str.encode('utf-8')
-    textstr = unicode(textstr.decode("unicode-escape"))
-    return textstr.encode('utf-8')   
+    outstr = aseag_str
+    # nothing to be done here 
+    return outstr    
 
 def unix_epoch_to_utcdatetime(epoch_ms):
     ts = epoch_ms * (10**(-3))
@@ -126,9 +123,9 @@ def get_stoppoint(name):
         raise Exception
     data = request.json()
     resultstops = []
-    print ("DEBUG: got request \n"+ str(data) + "\n--------------")
+    print (u"DEBUG: got request \n"+ str(data) + "\n--------------")
     if data['resultCount'] == 0:
-        myask_log.debug(3, "No result for stop name {}".format(name))
+        myask_log.debug(3, u"No result for stop name {}".format(name))
     elif data['resultCount'] > 1:        
         print("More than one result for stop name {}:".format(name))
         print("ID\tName")
@@ -139,7 +136,7 @@ def get_stoppoint(name):
     else: # a single result was shown
         stopid = data['resultList'][0]['stopPointId']
         stopname = unicodify(data['resultList'][0]['stopPointName'])        
-        myask_log.debug(3, "Found a single match for '"+name+"': "+str(stopid) +" : "+stopname)
+        myask_log.debug(3, u"Found a single match for '"+name+"': "+str(stopid) +" : "+stopname)
         resultstops.append([stopid,stopname])
         
     return resultstops
@@ -190,22 +187,35 @@ def get_stopdata(stop_point_id, lines):
     data = deduplication(parsejson(request.text, request.encoding))
     return data
 
-def get_routedata(start, stop):
-    parameter = {'startStopId': start, 'endStopId': stop, 'departureTime': unix_epoch_from_now(), 'maxNumResults': 4}
-    request = requests.get(baseurl.format(url_j), params = parameter)
-    if request.status_code != 200:
-        raise Exception
-    if request.headers['content-type'] != 'application/json;charset=UTF-8':
-        raise Exception
-    data = request.json()
-    return data
 
 def GetDepartures(StopID, busline, direction, utc_offset):
-    myask_log.debug(3, "aseag_api.GetDepartures: Haltestellenabfrage von "+ str(StopID)+ ". Buslinie: '"+str(busline)+"'. Direction: "+str(direction))
+    #--------------------------------------------------------------------------
+    # Returns a list of live bus departures from the specified bus stop
+    # PARAMETERS:
+    # - 'StopID'  Bus stop ID for the departure station (integer, 1000000-999999)
+    # - 'busline' : (integer/string) Filter to show only buses from that line.
+    #                If '0', all buses are shown
+    # - 'direction: (string) Shows only buses for the specified connection
+    #                either 'DIR_INWARD_ or 'DIR_OUTWARD'
+    #                if "", all departures are shown
+    # 
+    # - utc_offset:     Timezone, for which the times should be returned (API uses UTC)
+    # RETURNS:
+    # List of departures from the station with:
+    # [ 
+    #    dep_time,    // datetime. Estimated departure time
+    #    busnr,       // string    Bus number
+    #    destination, // (string) destination of the bus
+    # ]
+    #--------------------------------------------------------------------------
+    myask_log.debug(3, u"aseag_api.GetDepartures: Haltestellenabfrage von "+ str(StopID)+ u". Buslinie: '"+str(busline)+u"'. Direction: "+str(direction))
     if busline == 0: buses = []
     else: buses = [str(busline)] 
     
     output = get_stopdata(StopID, buses)
+#    print "DEPARTURES:-------------------------"
+#    print json.dumps(output, indent=4, sort_keys=False)
+#    print "END_CONNECTION-------------------------------------"
     connection_list = []
     for line in output:
         print "LINE: "+ str(line)
@@ -217,16 +227,70 @@ def GetDepartures(StopID, busline, direction, utc_offset):
             if MatchesDirection(StopID, direction, busnr, destination):
                 connection = (dep_time, busnr, destination)
                 connection_list.append(connection)
-                myask_log.debug(5, "Using connection line "+str(busnr)+" to "+str(destination)+ ": matches direction")
             else:
-                myask_log.debug(5, "Ignoring connection line "+str(busnr)+" to "+str(destination)+ ": does not match direction")
-    myask_log.debug(4, str(len(connection_list))+ " connections found")
+                myask_log.debug(5, u"Ignoring connection line "+str(busnr)+u" to "+ destination + u": does not match direction")
+    myask_log.debug(4, str(len(connection_list))+ u" connections found")
     
     return connection_list
 
+def get_routedata(origin_ID, destination_ID):
+    #---------------------------------------------------------------------------
+    # core function for retrieving a connection from the ASEAG server
+    # PARAMETERS:
+    # - origin_ID:      Bus stop ID for the departure station (integer, 1000000-999999)
+    # - destination_ID: Bus stop ID for the departure station (integer, 1000000-999999)
+    # RETURNS:
+    # raw JSON data structure with the connection results
+    #---------------------------------------------------------------------------
+    parameter = {'startStopId': origin_ID, 'endStopId': destination_ID, 'departureTime': unix_epoch_from_now(), 'maxNumResults': 4}
+    request = requests.get(baseurl.format(url_j), params = parameter)
+    if request.status_code != 200:
+        myask_log.error(u"ASEAG API call returned unexpected status code '"+str(request.status_code)+u"' \nRequest: "+ str(request))
+        return None
+    if 'content-type' not in request.headers: 
+        myask_log.error(u"ASEAG API call misses header '"+str(request.headers)+u"' \nRequest: "+ str(request))
+        return None
+    if request.headers['content-type'] != 'application/json;charset=UTF-8':
+        myask_log.error(u"ASEAG API call returned unexpected header '"+str(request.headers['content-type'])+u"' \nRequest: "+ str(request))
+        return None
+    data = request.json()
+    return data
+
 def GetConnections(origin_ID, destination_ID, utc_offset):
-    myask_log.debug(3, "Routenabfrage von "+str(origin_ID) + " nach "+ str(destination_ID)+"...")
+    #---------------------------------------------------------------------------
+    # Retrieves a connection from the ASEAG server (using get_routedata) and
+    # returns the connection in a simplified format
+    # PARAMETERS:
+    # - origin_ID:      Bus stop ID for the departure station (integer, 1000000-999999)
+    # - destination_ID: Bus stop ID for the departure station (integer, 1000000-999999)
+    # - utc_offset:     Timezone, for which the times should be returned (API uses UTC)
+    #
+    # RETURNS: datastructure holding multiple connections (joruneys)
+    #         Each connection can consist of several parts ('legs')
+    #   '[     // list of journeys (matching connections)
+    #       'start_datetime' : (datetime) departure time in local time
+    #       'end_datetime'   : (datetime) arrival time in local time
+    #       'start_loc'      : (string)  name of the overall departure station
+    #       'end_loc'        : (string)  name of the overall arrival station
+    #       'legs' :  [ // list of legs in this journey
+    #           'type' : 'LineChange' | 'bus' | 'walk'
+    #            'start_loc': (string)  name of the departure location for this leg
+    #            'end_loc' :  (string)  name of the arrival location for this leg
+    #            'line'  (string) name of busline (only for type 'bus')
+    #            'start_datetime' :  (datetime) start time for this leg (in local time)
+    #            'end_datetime'   :  (datetime) end time for this leg (in local time)
+    #          ]
+    #      ] 
+    # If an error occurs, the function returns an empty connection list
+    # If an error occurs parsing a specific journey, this journey is returned as empty
+    #---------------------------------------------------------------------------
+    myask_log.debug(3, u"Fetching connection from  '"+str(origin_ID) + u"' to '"+ str(destination_ID)+u"'...")
     output = get_routedata(origin_ID, destination_ID)
+    if output == None: return []
+
+#    print "CONNECTION:-------------------------"
+#    print json.dumps(output, indent=4, sort_keys=False)
+#    print "END_CONNECTION-------------------------------------"
     result_connections = []
     for journey in output['resultList']:
         res_journey = {}
@@ -273,22 +337,38 @@ def GetConnections(origin_ID, destination_ID, utc_offset):
                     res_connection_leg['end_loc'] =   connection_leg['end']['location']['stopPointName']
                 res_journey['legs'].append(res_connection_leg)
         except KeyError as e:
-            print("error: cannot parse journey "+ str(journey))
+            myask_log.error(u"error: cannot parse journey "+ str(journey))
             print e.message, e.args
+#            print json.dumps(output, indent=4, sort_keys=False)
             res_journey = []
 
         result_connections.append(res_journey)
    
-    myask_log.debug(3, "..."+str(len(result_connections))+" connections found" )
-    
+    myask_log.debug(3, u"..."+str(len(result_connections))+u" connections found" )    
     return result_connections
 
 def GetConnectionsWithBus(origin_ID, destination_ID, busline, utc_offset):
+    #---------------------------------------------------------------------------
+    # Retrieves connection thet contain a specific busline only.
+    # The system fetches connections from 'origin_ID' to 'destination_ID' using
+    # GetConnections().
+    # The results are then filtered to only contain connections where
+    # at least one leg uses the specified busline.
+    # If no matches are found at all, the system returns the full list (constraint is relaxed)
+    # PARAMETERS:
+    # - origin_ID:      Bus stop ID for the departure station (integer, 1000000-999999)
+    # - destination_ID: Bus stop ID for the departure station (integer, 1000000-999999)
+    # - busline:        (int/string) denoting the busline to be filtered for
+    # - utc_offset:     Timezone, for which the times should be returned (API uses UTC)
+    # RETURNS:  match,connection_list
+    # 'match' (booloean): True if the busline constraint was met, False if it was relaxed
+    # 'connection_list' list of bus connections. See GetConnections() for details
+    #---------------------------------------------------------------------------   
     connection_list =  GetConnections(origin_ID, destination_ID, utc_offset)
     
     if busline == 0: return (True, connection_list)
     
-    print("checking for buses"+ str(busline))
+    print(u"checking for buses"+ str(busline))
     matching_connections = []
     # check if the buses are indeed used
     for connection in connection_list:
@@ -312,7 +392,7 @@ def GetConnectionsWithBus(origin_ID, destination_ID, busline, utc_offset):
        
 def GetFilteredConnections(start_id, stop_id, preferred_bus, prefered_transport, utc_offset):
     if prefered_transport != "":
-        myask_log.warning("GetFilteredConnections: Filtering by transport not yet impleneted")
+        myask_log.warning(u"GetFilteredConnections: Filtering by transport not yet implemented")
         
     return GetConnectionsWithBus(start_id, stop_id, preferred_bus, utc_offset)
     
@@ -325,7 +405,7 @@ def FindFavoriteConnetions(start_id, stop_id, start_time, end_time, preferred_bu
             tmp = datetime.datetime.strptime(start_time, "%H:%M")
             window_start = tmp.time()
         else:
-            myask_log.error("Invalid start time format in 'FindFavoriteConnetions': "+start_time)
+            myask_log.error(u"Invalid start time format in 'FindFavoriteConnetions': "+start_time)
             start_time = datetime.datetime.utcnow()+ datetime.timedelta(hours = utc_offset)
   
         if(end_time == "" ):
@@ -334,7 +414,7 @@ def FindFavoriteConnetions(start_id, stop_id, start_time, end_time, preferred_bu
             tmp = datetime.datetime.strptime(end_time, "%H:%M")
             window_end= tmp.time()
         else:
-            myask_log.error("Invalid end time format in 'FindFavoriteConnetions': "+ end_time)
+            myask_log.error(u"Invalid end time format in 'FindFavoriteConnetions': "+ end_time)
             window_end = window_start + datetime.timedelta(hours=1)
        
        
