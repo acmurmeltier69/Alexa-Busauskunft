@@ -4,8 +4,8 @@
 <ändere> ::= ändere | verändere | setze 
 <zu_ändern> ::= zu ändern | zu verändern | zu setzen 
 # prepositions
-<von>   ::= von | ab | von der | ab der
-<nach>  ::= nach | in die | zur | zum
+<von>   ::= von | vom | ab | von der | ab der
+<nach>  ::= nach | zum | in die | zur 
 <zu> ::= zu | auf
 <die_bevorzugte_haltestelle> ::= die bevorzugte haltestelle | meine bevorzugte haltestelle | meine lieblingshaltestelle 
 #-------------------------------------------------
@@ -23,6 +23,7 @@ GetDeparturesFromFavorite ::= wann <fährt> {Next} {Transport} [nummer] {Busline
 GetDeparturesFromFavorite ::= [<suche>] wann {Next} {Transport} [{Direction}] <fährt>
 GetDeparturesFromFavorite ::= [<suche>] wann {Next} [linie] {Busline} [{Direction}] <fährt>
 GetDeparturesFromFavorite ::= [<suche>] wann {Next} {Transport} [nummer] {Busline} [{Direction}] <fährt>
+GetDeparturesFromFavorite ::= nach [{Next}] {Transport} [{Direction}] 
 
 #Noun utterances (“the horoscope for…”)
 GetDeparturesFromFavorite ::= [<suche>] [{Next}] {Transport} der [linie] {Busline} [{Direction}]
@@ -41,6 +42,7 @@ GetDeparturesFromOther ::= wann <fährt> {Next} {Transport} [nummer] {Busline} <
 GetDeparturesFromOther ::= [<suche>] wann {Next} {Transport} <von> {Origin} [{Direction}] <fährt>
 GetDeparturesFromOther ::= [<suche>] wann {Next} [linie] {Busline} <von> {Origin} [{Direction}] <fährt>
 GetDeparturesFromOther ::= [<suche>] wann {Next} {Transport} [nummer] {Busline} <von> {Origin} [{Direction}] <fährt>
+GetDeparturesFromOther ::= nach [{Next}] {Transport} <von> {Origin} [{Direction}] 
 
 #Noun utterances (“the horoscope for…”)
 GetDeparturesFromOther ::= [<suche>] [{Next}] {Transport} <von> {Origin}
@@ -60,6 +62,8 @@ FindConnectionFromFavorite ::= wie komme ich <nach> {Destination}
 FindConnectionFromFavorite ::= [<suche>] wann {Next} {Transport} <nach> {Destination} <fährt>
 FindConnectionFromFavorite ::= wann ich {Next} {Transport} <nach> {Destination} habe
 FindConnectionFromFavorite ::= wie ich <nach> {Destination} komme
+FindConnectionFromFavorite ::= nach [{Next}] {Transport} <nach> {Destination}
+
 
 #Noun utterances (“the horoscope for…”)
 FindConnectionFromFavorite ::= [<suche>] [{Next}] {Transport} <nach> {Destination}
@@ -76,6 +80,7 @@ FindConnectionFromOther ::= wie komme ich <von> {Origin} <nach> {Destination}
 # frage alexa "..." AND öffne alexa und "<suche> ..."
 FindConnectionFromOther ::= [<suche>] wann {Next} {Transport} <von> {Origin} <nach> {Destination} kommt
 FindConnectionFromOther ::= wie ich <von> {Origin} <nach> {Destination} komme 
+FindConnectionFromOther ::= nach [{Next}] {Transport} <von> {Origin} <nach> {Destination}
 
 #Noun utterances (“the horoscope for…”)
 FindConnectionFromOther ::= <suche> [{Next}] {Transport} <von> {Origin} <nach> {Destination}
