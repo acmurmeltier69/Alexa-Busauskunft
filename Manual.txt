@@ -1,0 +1,33 @@
+Aseag Skill
+Nahverkehrs-Auskunft für den Raum Aachen
+By ACMurmeltier69
+
+Testing Instructions:
+The skill assumes timezone=UTC+1
+For some functions, you should set default bus stop using command 
+"ändere die bevorzugte haltestelle zu {Origin}"
+
+Short Skill Description:
+Dieser Skill bietet Live Abfahrts- und Verbindungsinformationen für die Busse der Aachener Nahverkehrs (ASEAG).
+
+Full Skill Description
+Mit diesem Skill haben Sie Zugriff auf die Live Informationen über Busse der ASEAG.
+
+Nachdem man einmalig eine Haltestelle als bevorzugten Abfahrtspunkt festgelegt hat, 
+können Abfahrten und Verbindungen von dieser Haltestelle besonders einfach abgefragt werden werden.
+
+  - "Zeige Abfahrten ab Elisenbrunnen"
+  - "Wann färt die Linie 21 ab Elisenbrunnen"  
+  - "Zeige mir Verbindungen von Richterich Rathaus zum Elisenbrunnen"
+
+Nach Festlegen der bevorzugten Haltestelle mit z.B:
+"Ändere die bevorzugte haltestelle zu Technologiepark"
+geht auch:
+  - "Wann färt der nächste Bus"
+  - "Wann geht die Linie 34 Richtung stadteinwärts"
+  
+https://github.com/acmurmeltier69/Alexa-Busauskunft
+
+Example Phrases:
+Frage die Aseag wann der nächste Bus ab Ponttor zum Hauptbahnhof fährt
+Zeige Abfahrten ab Elisenbrunnen
