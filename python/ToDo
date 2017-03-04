@@ -1,12 +1,11 @@
 ToDo Items for Alexa-Busauskunft skill
 ======================================
-
- - correct non-ASCII characters in output
-   - ssml
-   - card
-      - slots
-      - text
-   - debug messages
+  
+  - command-line support for ASEAG API
+    - aseag_api.py [-org DEP_STOP_ID] [-dest DESTINATION_STOP_ID] [-line LINENUMBER] [-dir IN_OUT] [-t TRANSPORT] [-raw]
+	   - if no origin is given, system uses default-stop 
+	   - if no destination is given, system shows departures from origin
+	   output: if '-raw' is given, present raw output from ASEAG API, else give simplified output   
     
  - fix "stadteinwärts" / "stadtauswärts" for all stations
  
@@ -14,8 +13,7 @@ ToDo Items for Alexa-Busauskunft skill
 
  - treat {Next} slot to define which results are read back to user
 
- - remove debug output for online version
+ - remove debug output for published version
 
  - allow "city" as destination --> choose default stop for bus/train
  
- - generic inbound/outbound behavior
