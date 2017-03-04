@@ -116,13 +116,13 @@ def _FetchConnections(slots, appdef, user_profile):
     if 'utc_offset' in slots: utc_offset = slots['utc_offset']
     else: utc_offset = 0            
 
-    if 'Busline' in slots: busfilter = ToInt(slots['Busline'])
-    else: busfilter = 0
+    if 'Busline' in slots and slots['Busline'] != "?" : linefilter = slots['Busline']
+    else: linefilter = ''
      
     if 'Transport' in slots: transport = slots['Transport']
     else: transport = ""
 
-    match, result_connections = aseag_api.GetFilteredConnections(slots['qorg_id'], slots['qdest_id'], busfilter, transport, utc_offset)
+    match, result_connections = aseag_api.GetFilteredConnections(slots['qorg_id'], slots['qdest_id'], linefilter, transport, utc_offset)
                      
     myask_log.debug(2, "connection results from "+ str(slots['qorg_id'])+ " to " + str(slots['qdest_id'])+ \
                     "match:" +str(match)+":\n" + str(result_connections))
@@ -153,8 +153,8 @@ def process_GetDeparturesFromFavorite(slots, appdef, user_profile):
     if 'utc_offset' in slots: utc_offset = slots['utc_offset']
     else: utc_offset = 0            
 
-    if 'Busline' in slots: busfilter = ToInt(slots['Busline'])
-    else:   busfilter = 0
+    if 'Busline' in slots and slots['Busline'] != "?" : linefilter = slots['Busline']
+    else:   linefilter = ''
  
     if "Direction" in slots: direction = slots["Direction"]
     else: direction = ""
@@ -169,7 +169,7 @@ def process_GetDeparturesFromFavorite(slots, appdef, user_profile):
     
     if(slots['qorg_id']) < 10000: return bus_response.out_InvalidFavorite(user_profile)
     
-    results = aseag_api.GetDepartures(slots['qorg_id'], busfilter, direction, utc_offset)
+    results = aseag_api.GetDepartures(slots['qorg_id'], linefilter, direction, utc_offset)
     return bus_response.out_Departures(results, slots, appdef, user_profile)
 
 def process_GetDeparturesFromOther(slots, appdef, user_profile):
@@ -190,8 +190,8 @@ def process_GetDeparturesFromOther(slots, appdef, user_profile):
     if 'utc_offset' in slots: utc_offset = slots['utc_offset']
     else: utc_offset = 0            
 
-    if 'Busline' in slots: busfilter = ToInt(slots['Busline'])
-    else:   busfilter = 0
+    if 'Busline' in slots and slots['Busline'] != "?" : linefilter = slots['Busline']
+    else:   linefilter = ''
  
     if "Direction" in slots: direction = slots["Direction"]
     else: direction = ""
@@ -215,7 +215,7 @@ def process_GetDeparturesFromOther(slots, appdef, user_profile):
     if slots['qorg_id'] < 10000:
         return bus_response.out_InvalidOrigin(slots['Origin'], slots, appdef, user_profile)
     else: 
-        results = aseag_api.GetDepartures(slots['qorg_id'], busfilter, direction, utc_offset)
+        results = aseag_api.GetDepartures(slots['qorg_id'], linefilter, direction, utc_offset)
         return bus_response.out_Departures(results, slots, appdef, user_profile)
 
     # if we are here, something went wrong
@@ -248,8 +248,8 @@ def process_GetFavConnecionDepartures(slots, appdef, user_profile):
                 myask_log.warning("No StartID or StopID found in FavoriteConnection '"+slots["FavConnection"]+"' for user ")
                 return bus_response.out_InvalidFavoriteConnection(slots, appdef, user_profile)
             else:
-                if "PreferredLines"  in fav_connection: busfilter = ToInt(fav_connection["PreferredLine"]) 
-                else: busfilter = 0
+                if "PreferredLines"  in fav_connection: linefilter = fav_connection["PreferredLine"] 
+                else: linefilter = ''
 
                 if "DepTimeWindowStart" in fav_connection: start_time = fav_connection["DepTimeWindowStart"]
                 else: start_time = ""
@@ -263,11 +263,11 @@ def process_GetFavConnecionDepartures(slots, appdef, user_profile):
                 (match, result_connections) = aseag_api.FindFavoriteConnetions(fav_connection["OrgID"],
                                                                                fav_connection["DestID"],
                                                                                start_time, end_time,
-                                                                               busfilter, utc_offset)
+                                                                               linefilter, utc_offset)
                 # put it in the normal fields for smooth output
                 slots['qorg_id'] = ToInt(fav_connection["OrgID"])
                 slots['qdest_id'] = ToInt(fav_connection["DestID"])
-                if busfilter != 0 : slots['Busline'] = str(busfilter)
+                if linefilter != '' : slots['Busline'] = str(linefilter)
                 return bus_response.out_FavoriteConnection(match, result_connections, slots, appdef, user_profile)
 
     # if we are here, something went wrong
@@ -532,6 +532,9 @@ def on_session_ended(session_ended_request, session, user_profile):
 # --------------- Main handler ------------------
 
 def lambda_handler(event, context, iswin=False):
+    DEVELOPMET_IDs=['LOCAL_TEST', 
+                    'amzn1.ask.skill.a5cea9e0-a824-45e6-830f-5e048085f85d']  # andi debug
+    
     """ Route the incoming request based on type (LaunchRequest, IntentRequest,
     etc.) The JSON body of the request is provided in the event parameter.
     """
@@ -548,7 +551,7 @@ def lambda_handler(event, context, iswin=False):
     function.
     """
     if (event['session']['application']['applicationId'] != appdef.GetAppID())\
-        and (event['session']['application']['applicationId'] != 'LOCAL_TEST'):
+        and (event['session']['application']['applicationId'] not in  DEVELOPMET_IDs):
         raise ValueError("Invalid Application ID")
 
 

@@ -49,19 +49,19 @@ def MatchesDirection(station_ID, direction, line, destination):
     else:
         inwardlist = aseag_data.HARDCODED_DIRECTIONS["DEFAULT"]["inward"]
         outwardlist = aseag_data.HARDCODED_DIRECTIONS["DEFAULT"]["outward"]
-    busline = int(line)
+    busline = line
     
     if direction == "DIR_INWARD":
         # positive list: 
         for (itemid, itemdest) in inwardlist:
             if destination == itemdest: # the destination is in the list
-                if itemid == 0 or itemid == busline: # the destination matches for all buses or the bus is the right one
+                if itemid == '' or itemid == busline: # the destination matches for all buses or the bus is the right one
                     myask_log.debug(10, u"Match: Found inbound match for station '"+key+u"' Bus "+str(busline)+ ": "+destination)
                     return True    
         # negative list let's check if the item is in the outbound list
         for (itemid, itemdest) in outwardlist:
             if destination == itemdest: # the destination is in the list
-                if itemid == 0 or itemid == busline: # the destination matches for all buses or the bus is the right one
+                if itemid == '' or itemid == busline: # the destination matches for all buses or the bus is the right one
                     myask_log.debug(10, u"Mismatch: Found outbound match for station '"+key+u"' Bus "+str(busline)+ ": "+destination)
                     return False    
         myask_log.debug(10, u"Did not find in/out match for '"+key+u"' Bus "+str(busline)+ u": "+destination)
@@ -70,13 +70,13 @@ def MatchesDirection(station_ID, direction, line, destination):
         # positive list: 
         for (itemid, itemdest) in outwardlist:
             if destination == itemdest: # the destination is in the list
-                if itemid == 0 or itemid == busline: # the destination matches for all buses or the bus is the right one
+                if itemid == '' or itemid == busline: # the destination matches for all buses or the bus is the right one
                     myask_log.debug(10, u"Match: Found outbound match for station '"+key+u"' Bus "+str(busline)+ u": "+destination)
                     return True    
         # negative list let's check if the item is in the outbound list
         for (itemid, itemdest) in inwardlist:
             if destination == itemdest: # the destination is in the list
-                if itemid == 0 or itemid == busline: # the destination matches for all buses or the bus is the right one
+                if itemid == '' or itemid == busline: # the destination matches for all buses or the bus is the right one
                     myask_log.debug(10, u"Mismatch: Found inbound match for station '"+key+u"' Bus "+str(busline)+ u": "+destination)
                     return False    
         myask_log.debug(10, u"Did not find in/out match for '"+key+u"' Bus "+str(busline)+ ": "+destination)
@@ -209,7 +209,7 @@ def GetDepartures(StopID, busline, direction, utc_offset):
     # ]
     #--------------------------------------------------------------------------
     myask_log.debug(3, u"aseag_api.GetDepartures: Haltestellenabfrage von "+ str(StopID)+ u". Buslinie: '"+str(busline)+u"'. Direction: "+str(direction))
-    if busline == 0: buses = []
+    if busline == '' or busline == '?': buses = []
     else: buses = [str(busline)] 
     
     output = get_stopdata(StopID, buses)
@@ -366,7 +366,7 @@ def GetConnectionsWithBus(origin_ID, destination_ID, busline, utc_offset):
     #---------------------------------------------------------------------------   
     connection_list =  GetConnections(origin_ID, destination_ID, utc_offset)
     
-    if busline == 0: return (True, connection_list)
+    if busline == '' or busline == '?': return (True, connection_list)
     
     print(u"checking for buses"+ str(busline))
     matching_connections = []
@@ -376,7 +376,7 @@ def GetConnectionsWithBus(origin_ID, destination_ID, busline, utc_offset):
         if 'legs' in connection:
             usesbus = False
             for leg in connection['legs']:
-                if 'line' in leg and int(leg['line']) == busline:
+                if 'line' in leg and leg['line'] == busline:
                     myask_log.debug(5, u"match found for bus "+str(busline) +\
                                     u" in connection "+str(connection) )
                     usesbus = True

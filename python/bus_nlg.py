@@ -132,7 +132,14 @@ def AeagServerError(slots, appdef, user_profile):
 
 def SpeakDepartures(departure_list, slots, appdef):
     if 'Busline' in slots: 
-        return SpeakLineDepartures(departure_list, slots, appdef)
+        if slots['Busline'] == '?': 
+            if 'Busline.literal' in slots:
+                out = u'Es tut mir leid, ich kenne die Busnummer '+slots['Busline.literal']+ u' nicht.<break/> '
+            else:
+                out = u'Es tut mir leid, ich kenne diesen Bus nicht.<break/> '
+            return out + SpeakDeparturesList(departure_list, slots, appdef)
+        else: 
+            return SpeakLineDepartures(departure_list, slots, appdef)
     else:
         return SpeakDeparturesList(departure_list, slots, appdef)
 

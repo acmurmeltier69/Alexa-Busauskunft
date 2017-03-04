@@ -15,7 +15,7 @@ TESTINTENTS = ['*']
 BASEDIR = "C:/Users/Andreas_Kellner/_MY_DATA/AlexaSkill/git/Alexa-Busauskunft/"
 TEST_DIR = BASEDIR + "test_events/"
 TESTFILE_BATCH = "TestList2.csv"
-TESTFILE_SINGLE = "T2_zeige_abfahrten_ab_elisenbrunnen.js"
+TESTFILE_SINGLE = "T2_zeige_abfahrten_der_Linie_3a_ab_eurogress.js"
 
 ASK_RESOURCEDIR = BASEDIR + "ask_resouces/"
 ASK_GENERATION_GRAMMAR = "inputgrammar.txt"

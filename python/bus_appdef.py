@@ -12,11 +12,12 @@
 import aseag_data
 
 APPNAME = "aseag"
-APPID   = "amzn1.ask.skill.a5cea9e0-a824-45e6-830f-5e048085f85d"
+#APPID   = "amzn1.ask.skill.a5cea9e0-a824-45e6-830f-5e048085f85d" # andi
+APPID   = "amzn1.ask.skill.f83ddc70-f70f-40de-aa46-8d966907d8f3" # mankei
 INTENTS = {
             "GetDeparturesFromFavorite":  ["Direction", "Busline", "Next", "Transport"],
             "GetDeparturesFromOther":     ["Origin", "Direction", "Busline", "Next", "Transport"],
-            "GetFavConnecionDepartures" : ["FavConnection"],
+#            "GetFavConnecionDepartures" : ["FavConnection"],
             "FindConnectionFromFavorite": ["Destination", "Next", "Transport"],
             "FindConnectionFromOther":    ["Origin", "Destination", "Next", "Transport"],
             "ChangeDefaultStation":       ["Origin"],
@@ -27,7 +28,7 @@ INTENTS = {
 
 SLOTS = {
             "Direction" :       "LIST_OF_DIRECTIONS",
-            "Busline" :         "AMAZON.NUMBER",
+            "Busline" :         "LIST_OF_ASEAG_LINES",
             "Next" :            "MODIFIER_NEXT",
             "Transport" :       "LIST_OF_TRANSPORT",
             "Origin" :          "LIST_OF_STATIONS",
@@ -58,5 +59,6 @@ SLOTTYPES = {
                             u"mein schulbus", u"mein bus in die schule", u"mein bus zur schule"]],
                 ["WORK", [u"mein bus in die arbeit", u"mein bus zur arbeit", u"mein bus in die firma"]],
             ],
+            "LIST_OF_ASEAG_LINES" : aseag_data.BUSLINES, # import from external file
             "LIST_OF_STATIONS" : aseag_data.STATIONLIST # import from external file
    }
