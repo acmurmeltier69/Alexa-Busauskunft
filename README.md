@@ -1,12 +1,12 @@
 # Alexa-Busauskunft
-Alexa Skill für Buauskunfts  
-Geschriebe nfür Nahverkehr im Raum Aachen (ASEAG), kann aber leicht für andere Städte angepasst werden.
+Alexa Skill für Busauskunft
+Geschrieben für Nahverkehr im Raum Aachen (ASEAG), kann aber leicht für andere Städte angepasst werden.
 
 Der Skill benutzt die ASEAG Unified realtime api (URA) (Base URL:  http://ivu.aseag.de/interfaces/ura/instant_V1)
-Siehe z.B http://content.tfl.gov.uk/tfl-live-bus-river-bus-arrivals-api-documentation.pdf 
+Siehe z.B http://content.tfl.gov.uk/tfl-live-bus-river-bus-arrivals-api-documentation.pdf
 
 ## Requires
-Der Skill benutztz die folgenden "externen" Pakete:
+Der Skill benutzt die folgenden "externen" Pakete:
 -  "requests" (zur Vereinfachung der Anfragen an die ASEAG API) Siehe http://docs.python-requests.org/en/master/
 -  "myask"    (ein Paar kleine Helferchen, die ich für meine Alexa Skills geschrieben habe) Siehe https://github.com/acmurmeltier69/myask.git
 Diese Pakete müssen als Unterverzeichnisse eingebunden werden, wenn der Handler als aws Lambda hochgeladen wird.
@@ -59,7 +59,7 @@ Beispiel:
    
 >  "Ändere die_bevorzugte_haltestelle zu Kohlscheid Markt"
 
-    Die bevorzugte Haltestelle für den benutzer wird anhand der Amazon UserID in einer DynamoDB Datenbank abgelegt
+    Die bevorzugte Haltestelle für den Benutzer wird anhand der Amazon UserID in einer DynamoDB Datenbank abgelegt
 
 
 # Datenmodell für Alexa
@@ -79,6 +79,4 @@ Die entsprechenden Dateien wurden mit Hilfe des [myask](https://github.com/acmur
  
     Aus dieser kompakten Grammatik wird mit Hilfe des von *myask/myask_myask_utterancegen.py* eine Datei mit allen möglichen Formulierungen erzeugt, auf denen der Alexa Skill trainiert werden soll.
 
-(Leider hat sich herausgestellt, dass ASK nur eine sehr begrenzte Zahl von "Sample Utterances" akzeptiert. Ich musste die Alternativen Formuliereungen (z.B. Verben) wieder reduzieren. ) 
-     
-    
+(Leider hat sich herausgestellt, dass ASK nur eine sehr begrenzte Zahl von "Sample Utterances" akzeptiert. Ich musste die alternativen Formulierungen (z.B. Verben) wieder reduzieren. )
