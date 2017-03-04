@@ -547,7 +547,8 @@ def lambda_handler(event, context, iswin=False):
     prevent someone else from configuring a skill that sends requests to this
     function.
     """
-    if (event['session']['application']['applicationId'] != appdef.GetAppID()):
+    if (event['session']['application']['applicationId'] != appdef.GetAppID())\
+        and (event['session']['application']['applicationId'] != 'LOCAL_TEST'):
         raise ValueError("Invalid Application ID")
 
 

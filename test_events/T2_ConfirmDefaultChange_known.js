@@ -2,7 +2,7 @@
   "session": {
     "sessionId": "SessionId.4a22663c-ea22-49f5-acb3-8ebb7e5088fa",
     "application": {
-      "applicationId": "amzn1.ask.skill.a5cea9e0-a824-45e6-830f-5e048085f85d"
+      "applicationId": "LOCAL_TEST"
     },
     "attributes": {
       "Origin": "100708",
