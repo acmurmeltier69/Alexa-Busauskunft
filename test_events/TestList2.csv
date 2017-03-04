@@ -10,7 +10,9 @@ GetDeparturesFromFavorite;wann kommt die line sieben und vierzig;T2_wann_kommt_d
 GetDeparturesFromFavorite;wann kommt der n�chste bus stadteinw�rts;T2_wann_kommt_der_naechste_bus_stadteinwaerts.js;R1;USER_KNOWN;has_fav; - ; -  ;47; -  ;Bus;NEXT; -  ;
 GetDeparturesFromFavorite;wann kommt der n�chste bus der linie siebenundvierzig stadteinw�rts;T2_wann_kommt_der_naechste_bus_der_linie_siebenundvierzig_stadteinwaerts.js;R1;USER_KNOWN;has_fav; - ; -  ;47;inward;Bus;NEXT; -  ;
 GetDeparturesFromOther;zeige abfahrten ab elisenbrunnen;T2_zeige_abfahrten_ab_elisenbrunnen.js;R1;USER_NEW;has_fav;Elisenbrunnen; -  ; -  ; -  ; -  ; -  ; -  ;
-GetDeparturesFromOther;zeige abfahrten der Linie elf ab elisenbrunnen;T2_zeige_abfahrten_der_Linie_elf_ab_elisenbrunnen.js;R1;USER_NEW;has_fav;Elisenbrunnen; -  ;11; -  ; -  ; -  ; -  ;
+GetDeparturesFromOther;zeige abfahrten der Linie elf ab elisenbrunnen;T2_zeige_abfahrten_der_Linie_elf_ab_elisenbrunnen.js;R1;USER_NEW;has_fav;has_fav; -  ;11; -  ; -  ; -  ; -  ;
+GetDeparturesFromOther;zeige abfahrten der Linie elf c. ab elisenbrunnen;T2_zeige_abfahrten_der_Linie_UNKNOWN_ab_elisenbrunnen.js;R1;USER_NEW;has_fav;has_fav;;(11 c.);;;;;
+GetDeparturesFromOther;zeige abfahrten der Linie drei a. ab elisenbrunnen;T2_zeige_abfahrten_der_Linie_3a_ab_elisenbrunnen.js;R1;USER_NEW;has_fav;has_fav;;(11 c.);;;;;
 GetDeparturesFromOther;zeige abfahrten ab;T2_zeige_abfahrten_ab.js;R1;USER_KNOWN;has_fav; - ; -  ; - ; -  ; - ; -  ; -  ;
 GetDeparturesFromOther;zeige abfahrten ab UNKNOWN;T2_zeige_abfahrten_ab_UNKNOWN.js;W6;USER_NEW;has_fav;UNKNOWN; -  ; -  ; -  ; -  ; -  ; -  ;
 GetDeparturesFromOther;zeige abfahrten ab;T2_zeige_abfahrten_ab_ANONYM.js;W3;USER_NEW;no; - ; -  ; - ; -  ; - ; -  ; -  ;

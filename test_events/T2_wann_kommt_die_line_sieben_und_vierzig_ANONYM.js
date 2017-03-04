@@ -30,7 +30,7 @@
         },
         "Busline": {
           "name": "Busline",
-          "value": "47"
+          "value": "sieben und vierzig"
         }
       }
     }
