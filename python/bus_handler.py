@@ -213,7 +213,10 @@ def process_GetDeparturesFromOther(slots, appdef, user_profile):
         slots['qorg_id'] = ToInt(slots['Origin'])
 
     if slots['qorg_id'] < 10000:
-        return bus_response.out_InvalidOrigin(slots['Origin'], slots, appdef, user_profile)
+        if 'Origin.literal' in slots['Origin.literal']:
+            return bus_response.out_InvalidOrigin(slots['Origin.literal'], slots, appdef, user_profile)
+        else:
+            return bus_response.out_InvalidOrigin('', slots, appdef, user_profile)
     else: 
         results = aseag_api.GetDepartures(slots['qorg_id'], linefilter, direction, utc_offset)
         return bus_response.out_Departures(results, slots, appdef, user_profile)
@@ -313,7 +316,10 @@ def process_FindConnectionFromFavorite(slots, appdef, user_profile):
     myask_log.debug(5, "Got destination ID "+str(destination_id))
     if int(destination_id) < 10000:
         myask_log.warning("Invalid stop id for destination station:"+ str(destination_id))
-        return bus_response.out_InvalidDestination(destination_str, slots, appdef, user_profile)
+        if 'Destination.literal' in slots:
+            return bus_response.out_InvalidDestination(slots["Destination.literal"], slots, appdef, user_profile)
+        else:
+            return bus_response.out_InvalidDestination(destination_str, slots, appdef, user_profile)
 
     # we got a single result
     slots['qdest_id'] = destination_id
@@ -353,6 +359,9 @@ def process_FindConnectionFromOther(slots, appdef, user_profile):
         slots['qorg_id'] = ToInt(slots['Origin'])
 
     if slots['qorg_id'] < 10000:
+        if 'Origin.literal' in slots:
+            return bus_response.out_InvalidOrigin(slots['Origin.literal'], slots, appdef, user_profile)
+        else:
             return bus_response.out_InvalidOrigin(slots['Origin'], slots, appdef, user_profile)
     
         
@@ -370,7 +379,10 @@ def process_FindConnectionFromOther(slots, appdef, user_profile):
 
     if int(destination_id) < 10000:
         myask_log.warning("Invalid stop id for destination station:"+ str(destination_id))
-        return bus_response.out_InvalidDestination(destination_str, slots, appdef, user_profile)
+        if 'Destination.literal' in slots:
+            return bus_response.out_InvalidDestination(slots['Destination.literal'], slots, appdef, user_profile)
+        else:
+            return bus_response.out_InvalidDestination(destination_str, slots, appdef, user_profile)
 
     # we got a single result
     slots['qdest_id'] = destination_id
