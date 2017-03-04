@@ -1134,7 +1134,6 @@ BUSLINES = [
         ['13', [u'13', u'dreizehn'] ], 
         ['13A', [u'13A', u'dreizehn a.'] ], 
         ['13B', [u'13B', u'dreizehn b.'] ], 
-     	['13', [u'13', u'dreizehn'] ], 
      	['14', [u'14', u'vierzehn'] ], 
      	['15', [u'15', u'fünfzehn'] ], 
      	['16', [u'16', u'sechzehn'] ], 
