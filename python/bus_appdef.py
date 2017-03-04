@@ -23,7 +23,9 @@ INTENTS = {
             "ChangeDefaultStation":       ["Origin"],
             "AMAZON.YesIntent" : [],
             "AMAZON.NoIntent" : [],
-            "AMAZON.HelpIntent"  : []
+            "AMAZON.HelpIntent"  : [],
+            "AMAZON.CancelIntent" : [],
+            "AMAZON.StopIntent" : []
            }
 
 SLOTS = {
