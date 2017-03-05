@@ -14,6 +14,7 @@ import requests
 import json
 import re
 import aseag_data
+import argparse
 
 from myask import myask_log
 
@@ -123,12 +124,11 @@ def get_stoppoint(name):
         raise Exception
     data = request.json()
     resultstops = []
-    print (u"DEBUG: got request \n"+ str(data) + "\n--------------")
+    myask_log.debug(5, "got API request \n"+ str(data) + "\n--------------")
     if data['resultCount'] == 0:
         myask_log.debug(3, u"No result for stop name {}".format(name))
     elif data['resultCount'] > 1:        
-        print("More than one result for stop name {}:".format(name))
-        print("ID\tName")
+        myask_log.warning("More than one result for stop name '"+name+"' ("+str(data['resultCount'])+" found)")
         for elem in data['resultList']:
             stopid = elem['stopPointId']
             stopname = unicodify(elem['stopPointName'])        
@@ -172,7 +172,7 @@ def tsfilter(ts, totime): # Todo: schöner machen
         return (unix_epoch_to_utcdatetime(ts) >= datetime.datetime.utcnow() - datetime.timedelta(minutes = 5)) and (unix_epoch_to_utcdatetime(ts) <= datetime.datetime.now() + datetime.timedelta(minutes = totime))
 
 
-def get_stopdata(stop_point_id, lines):
+def get_stopdata(stop_point_id, lines, getraw=False):
     #--------------------------------------------------------------------------
     # returns the next buses of given lines from a bus stop
     # 
@@ -184,8 +184,11 @@ def get_stopdata(stop_point_id, lines):
         raise Exception
     if request.headers['content-type'] != 'application/json;charset=UTF-8':
         raise Exception
-    data = deduplication(parsejson(request.text, request.encoding))
-    return data
+    if getraw: 
+        return  request.text
+    else: 
+        data = deduplication(parsejson(request.text, request.encoding))
+        return data
 
 
 def GetDepartures(StopID, busline, direction, utc_offset):
@@ -218,7 +221,7 @@ def GetDepartures(StopID, busline, direction, utc_offset):
 #    print "END_CONNECTION-------------------------------------"
     connection_list = []
     for line in output:
-        print "LINE: "+ str(line)
+        myask_log.debug(5, "LINE: "+ str(line))
         if tsfilter(line[0], totime):
             dep_time = unix_epoch_to_utcdatetime(line[0]) + datetime.timedelta(hours = utc_offset)
             busnr = line[1]
@@ -435,4 +438,111 @@ def FindFavoriteConnetions(start_id, stop_id, start_time, end_time, preferred_bu
        
     else:
         return match, lineconnections
+
+def main():
+#        - aseag_api.py [-oid DEP_STOP_ID] [-did DESTINATION_STOP_ID] [-line LINENUMBER] [-dir IN_OUT] [-t TRANSPORT] [-raw]
+#       - if no origin is given, system uses default-stop 
+#       - if no destination is given, system shows departures from origin
+#       output: if '-raw' is given, present raw output from ASEAG API, else give simplified output   
+    print("in main")
+    parser = argparse.ArgumentParser()
+    parser.add_argument("-v", "--verbosity", type=int,
+                        help="define output verbosity")
+    org_group = parser.add_mutually_exclusive_group(required=True)
+    org_group.add_argument("-oid", "--origin_id", type=int,
+                        help="6-digit station ID of origin (departure) station")
+    org_group.add_argument("-oname", "--origin_name", type=str,
+                        help="name of origin (departure) station")
+    dep_group = parser.add_mutually_exclusive_group()
+    dep_group.add_argument("-did", "--destination_id", type=int,
+                        help="6-digit station ID of destination station")
+    dep_group.add_argument("-dname", "--destination_name", type=str,
+                        help="name of destination station")
+
+    parser.add_argument("-l", "--busline", type=str, 
+                        help="Line (NR or string")
+    parser.add_argument("-dir", "--direction", type=int, 
+                        help="direction: 1=inward 2=outward")
+    parser.add_argument("-raw", "--raw_mode", action="store_true",
+                        help="If set, output raw API results")
+    args = parser.parse_args()    
+
+    if args.verbosity:
+        myask_log.SetDebugLevel(args.verbosity)
+
+    if args.origin_id: 
+        origin_id = args.origin_id
+    elif args.origin_name: 
+        origin_ids =  get_stoppoint(args.origin_name)
+        if len(origin_ids) != 1: 
+            myask_log.error("no unique stop found")
+            for alt in origin_ids:
+                print alt
+            return
+        else:
+            origin_id = origin_ids[0][0]
+    else:
+        myask_log.error("origin destination not specified")
+    origin_id = int(origin_id)    # just to be sure
     
+    if origin_id <100000 or origin_id > 999999:
+        myask_log.error("invalid origin id '"+str(origin_id)+"#")
+
+    if args.destination_id: 
+        destination_id = args.destination_id
+    elif args.destination_name: 
+        destination_ids =  get_stoppoint(args.destination_name)
+        if len(destination_id) != 1: 
+            myask_log.error("no unique stop found")
+            for alt in destination_ids:
+                print alt
+            return
+        else:
+            destination_id = destination_ids[0][0]
+    else:
+        destination_id = 0 # code for not set
+    destination_id = int(destination_id)    # just to be sure
+
+    if destination_id != 0 and (destination_id <100000 or destination_id > 999999):
+        myask_log.error("invalid destination_id  '"+str(destination_id)+"#")
+        return
+    if args.busline: busline = args.busline
+    else: busline = "" 
+
+    if args.direction:
+        if args.direction == 1: direction = "DIR_INWARD"
+        elif args.direction == 2: direction = "DIR_OUTWARD"
+        else:
+            myask_log.error("invalid direction  '"+str(args.direction)+" (must be 1 (inbound) or 2 (outbound)")
+            return
+    else: 
+        direction = ""
+    # now process the commands
+    if destination_id == 0: # (departures only)
+        if args.raw_mode:
+            if direction != "":
+                print "Departure Post-Filter for direction not supported in raw mode"
+            if busline =="" : buslines = []
+            else: buslines = [busline]
+            results = get_stopdata(origin_id,buslines, getraw=True)
+            print  results
+        else:
+            results =  GetDepartures(origin_id, busline, direction, utc_offset=1)
+            for result in results:
+                print result
+    
+    else: # origin and destination
+        if args.raw_mode:
+            if busline != "":
+                print "Connection Post-Filter for busline not supported in raw mode"
+            print "Raw results-----------------"
+            output = get_routedata(origin_id, destination_id)
+            print json.dumps(output, indent=4, sort_keys=False)         
+        else:
+            match, results = GetConnectionsWithBus(origin_id, destination_id, busline, utc_offset=1)
+            print "Match: " +str(match)
+            for result in results:
+                print result
+            
+if __name__ == "__main__":
+    main()
