@@ -22,9 +22,9 @@ ASK_GENERATION_GRAMMAR = "inputgrammar.txt"
 ASK_SAMPLE_OUTPUT = "sample_utterances_generated.txt"
 
 #TEST_TYPE = CONST_TEST_UTTERANCE
-TEST_TYPE = CONST_TEST_BATCH
+#TEST_TYPE = CONST_TEST_BATCH
 #TEST_TYPE = CONST_TEST_RANDOM
-#TEST_TYPE = CONST_CREATE_ASK_SPEC
+TEST_TYPE = CONST_CREATE_ASK_SPEC
 #TEST_TYPE = CONST_CREATE_SAMPLES
 
 
@@ -63,16 +63,26 @@ def main():
                 print literal
     elif TEST_TYPE == CONST_CREATE_SAMPLES:
         inputfile = ASK_RESOURCEDIR + ASK_GENERATION_GRAMMAR
-        training_sentences = myask_utterancegen.createSampleUtterancesFromGrammar(inputfile)
+        corpus = myask_utterancegen.createSampleUtterancesFromGrammar(inputfile)    
         
         # print utterances to file
         outputfile = ASK_RESOURCEDIR + ASK_SAMPLE_OUTPUT
-        fout = open(outputfile, 'w+')
-        for i in range(len(training_sentences)):
-            line = training_sentences[i]
-            #        print "writing line "+str(i)+". --> '"+line+"'"
-            fout.write(line+"\n")
-        fout.close()
+
+        if outputfile == "":
+            for intent in corpus:
+                intent_sentences = corpus[intent] 
+                for i in range(len(intent_sentences)):
+                    line = intent +" "+ intent_sentences[i]
+                    print line
+        else:
+            outputfile = ASK_RESOURCEDIR + ASK_SAMPLE_OUTPUT
+            fout = open(outputfile, 'w+')
+            for intent in corpus:
+                intent_sentences = corpus[intent] 
+                for i in range(len(intent_sentences)):
+                    line = intent +" "+ intent_sentences[i]
+                    fout.write(line+"\n")
+            fout.close()
 
 
 #-------------------------------------------------------------------------------

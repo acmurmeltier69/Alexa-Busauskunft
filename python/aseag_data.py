@@ -1121,9 +1121,9 @@ STATIONLIST = [
 BUSLINES = [
     	['1', [u'1', u'eins']],
      	['2', [u'2', u'zwei', u'zwo']], 
-     	['3', [u'3', u'drei'] ],
-        ['3A', [u'3A', u'drei a.'] ],
-        ['3B', [u'3B', u'drei b.'] ],
+     	['3', [u'3', u'drei',
+               u'3A', u'drei a.',     # ASEAG API cannot work with busfilter 3A
+               u'3B', u'drei b.'] ],  # ASEAG API cannot work with busfilter 3B
         ['4', [u'4', u'vier'] ], 
      	['5', [u'5', u'fünf'] ], 
      	['6', [u'6', u'sechs'] ], 
@@ -1131,9 +1131,9 @@ BUSLINES = [
      	['8', [u'8', u'acht'] ], 
      	['11', [u'11', u'elf'] ], 
      	['12', [u'12', u'zwölf'] ], 
-        ['13', [u'13', u'dreizehn'] ], 
-        ['13A', [u'13A', u'dreizehn a.'] ], 
-        ['13B', [u'13B', u'dreizehn b.'] ], 
+        ['13', [u'13', u'dreizehn',
+                u'13A', u'dreizehn a.',  # ASEAG API cannot work with busfilter 13A
+                u'13B', u'dreizehn b.'] ], # ASEAG API cannot work with busfilter 13B
      	['14', [u'14', u'vierzehn'] ], 
      	['15', [u'15', u'fünfzehn'] ], 
      	['16', [u'16', u'sechzehn'] ], 
@@ -1167,7 +1167,7 @@ BUSLINES = [
      	['50', [u'50', u'fünfzig'] ], 
      	['51', [u'51', u'ein und fünfzig', u'einundfünfzig'] ], 
      	['52', [u'52', u'zwei und fünfzig', u'zwo und fünfzig', u'zweiundfünfzig'] ], 
-     	['53', [u'53', u'drei und fünfzig', u'dreiundfünfzig'] ], 
+     	['53    ', [u'53', u'drei und fünfzig', u'dreiundfünfzig'] ], 
      	['55', [u'55', u'fünf und fünfzig', u'fünfundfünfzig'] ], 
      	['57', [u'57', u'sieben und fünfzig', u'siebenundfünfzig'] ], 
      	['62', [u'62', u'zwei und sechzig', u'zwo und sechzig', u'zweiundsechzig'] ], 
@@ -1218,39 +1218,6 @@ BUSLINES = [
 
 
 
-################################################################################
-# HARDCODED_DIRECTIONS
-# 
-# This is a dirty hack until I find out how the ASEA api supports filtering 
-# by inbound/outbound connections
-# For specific, slots, we can specify a list of connection/destinations as "inbound" (stadteinwärts) vs outbound ("stadtauswärts)
-# For stops, where this has not been specified, the "Default" selection applies
-HARDCODED_DIRECTIONS = {
-            "210705" : {
-                "inward": [['', u"Aachen Bushof"],
-                           ['', u"Elisenbrunnen"],
-                           ['', u"Schnellbus Aachen Bushof"], 
-                           ['', u"Schnellb. Elisenbrunnen"], 
-                           ['34', u"Brand"], 
-                           ['34', u"Brand Ringstraße"]
-                       ],
-                "outward": [['', u"Herzogenrath Bahnhof"],
-                            ['', u"Merkstein A-Schmidt-Pl"], 
-                            ['', u"Kohlscheid Weststraße"], 
-                            ['', u"Kohlscheid Bahnhof"],
-                            ['', u"Pannesheide"], 
-                            ['34', u"Kerkrade Busstation"], 
-                            ['80', u"Kohlscheid Forensb. Str"],
-                            ['80', u"Kohlscheid Markt"]
-                        ]
-            },
-            "DEFAULT" : {
-                "inward": [['', u"Aachen Bushof"],
-                           ['', u"Elisenbrunnen"],
-                           ['', u"Schnellbus Aachen Bushof"], 
-                           ['', u"Schnellb. Elisenbrunnen"], 
-                       ],
-                "outward": [
-                        ]
-            }
-      }
+CENTRAL_DESTINATIONS = [ u"Aachen Bushof", u"Schnellbus Aachen Bushof", 
+                        u"Elisenbrunnen",  u"Schnellb. Elisenbrunnen"
+                        u"Aachen Kaiserplatz"]

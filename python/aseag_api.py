@@ -14,6 +14,7 @@ import requests
 import json
 import re
 import aseag_data
+import aseag_inbound_connection
 import argparse
 
 from myask import myask_log
@@ -44,44 +45,36 @@ def MatchesDirection(station_ID, direction, line, destination):
     if direction == "": return True # if there's no direction, everything matches
 
     key = str(station_ID)
-    if key in aseag_data.HARDCODED_DIRECTIONS:
-        inwardlist = aseag_data.HARDCODED_DIRECTIONS[key]["inward"]
-        outwardlist = aseag_data.HARDCODED_DIRECTIONS[key]["outward"]
+    if key in aseag_inbound_connection.INBOUND_LINES:
+        inwardlist = aseag_inbound_connection.INBOUND_LINES[key]
     else:
-        inwardlist = aseag_data.HARDCODED_DIRECTIONS["DEFAULT"]["inward"]
-        outwardlist = aseag_data.HARDCODED_DIRECTIONS["DEFAULT"]["outward"]
+        myask_log.error("Station '"+str(station_ID)+"' not found in inbound list. returning all stations")
+        return True
     busline = line
     
     if direction == "DIR_INWARD":
         # positive list: 
-        for (itemid, itemdest) in inwardlist:
-            if destination == itemdest: # the destination is in the list
-                if itemid == '' or itemid == busline: # the destination matches for all buses or the bus is the right one
-                    myask_log.debug(10, u"Match: Found inbound match for station '"+key+u"' Bus "+str(busline)+ ": "+destination)
-                    return True    
-        # negative list let's check if the item is in the outbound list
-        for (itemid, itemdest) in outwardlist:
-            if destination == itemdest: # the destination is in the list
-                if itemid == '' or itemid == busline: # the destination matches for all buses or the bus is the right one
-                    myask_log.debug(10, u"Mismatch: Found outbound match for station '"+key+u"' Bus "+str(busline)+ ": "+destination)
-                    return False    
-        myask_log.debug(10, u"Did not find in/out match for '"+key+u"' Bus "+str(busline)+ u": "+destination)
-        return True
+        if destination in aseag_data.CENTRAL_DESTINATIONS:
+            # if bus goes to one of those, it is by definition inbound. no need to look further
+            return True
+        elif str(line) in inwardlist: # we have a list of destinations of that line, which pass through the center
+            if destination in inwardlist[str(line)]: return True
+            else: return False
+        else:
+            #line unknown
+            return False
+
     elif  direction == "DIR_OUTWARD":
-        # positive list: 
-        for (itemid, itemdest) in outwardlist:
-            if destination == itemdest: # the destination is in the list
-                if itemid == '' or itemid == busline: # the destination matches for all buses or the bus is the right one
-                    myask_log.debug(10, u"Match: Found outbound match for station '"+key+u"' Bus "+str(busline)+ u": "+destination)
-                    return True    
-        # negative list let's check if the item is in the outbound list
-        for (itemid, itemdest) in inwardlist:
-            if destination == itemdest: # the destination is in the list
-                if itemid == '' or itemid == busline: # the destination matches for all buses or the bus is the right one
-                    myask_log.debug(10, u"Mismatch: Found inbound match for station '"+key+u"' Bus "+str(busline)+ u": "+destination)
-                    return False    
-        myask_log.debug(10, u"Did not find in/out match for '"+key+u"' Bus "+str(busline)+ ": "+destination)
-        return True
+        # exclude all known inbound lines
+        if destination in aseag_data.CENTRAL_DESTINATIONS:
+            # if bus goes to one of those, it is by definition inbound. no need to look further
+            return False
+        elif str(line) in inwardlist: # we have a list of destinations of that line, which pass through the center
+            if destination in inwardlist[str(line)]: return False
+            else: return True
+        else:
+            #line unknown
+            return True
     else:
         myask_log.error(u"Invalid direction '"+str(direction) +u"' found ignoring filter")
         return True
@@ -153,7 +146,7 @@ def parsejson(data, encoding):
     for line in data.splitlines():
         linelist = json.loads(line)
         if (linelist[0] == 1):
-            output.append((linelist[15],linelist[8],linelist[12]))
+            output.append((linelist[15],linelist[9],linelist[12]))
     output.sort(key=lambda tup: tup[0])
     return output
 
@@ -439,6 +432,34 @@ def FindFavoriteConnetions(start_id, stop_id, start_time, end_time, preferred_bu
     else:
         return match, lineconnections
 
+
+def getDirectConnection(origin_id, destination_id):
+    #---------------------------------------------------------------------------
+    # checks for direct connections from tart_id to stop_id and returns
+    # a list of entries [line, destination]
+    #---------------------------------------------------------------------------
+    direct_connections = []
+    connections = get_routedata(origin_id, destination_id)
+    if 'resultList' not in connections:
+        return direct_connections
+    for journey in connections['resultList']:
+        if 'elementList' not in journey: continue
+        if len(journey['elementList']) != 1:
+            myask_log.debug(7,"connection found with '"+str(len(journey['elementList']))+"' legs. ignoring")
+        else:
+            con = {}
+            leg = journey['elementList'][0]
+            try:
+                con['lineName'] = leg['lineName']
+                con['tripId'] = leg['tripId']
+                con['destinationName'] = leg['destinationName']
+                direct_connections.append(con)
+            except:
+                myask_log.debug(3, "fields missing")
+    return direct_connections
+      
+
+
 def main():
 #        - aseag_api.py [-oid DEP_STOP_ID] [-did DESTINATION_STOP_ID] [-line LINENUMBER] [-dir IN_OUT] [-t TRANSPORT] [-raw]
 #       - if no origin is given, system uses default-stop 
@@ -473,14 +494,14 @@ def main():
     if args.origin_id: 
         origin_id = args.origin_id
     elif args.origin_name: 
-        origin_ids =  get_stoppoint(args.origin_name)
-        if len(origin_ids) != 1: 
+        origin_id_list =  get_stoppoint(args.origin_name)
+        if len(origin_id_list) != 1: 
             myask_log.error("no unique stop found")
-            for alt in origin_ids:
+            for alt in origin_id_list:
                 print alt
             return
         else:
-            origin_id = origin_ids[0][0]
+            origin_id = origin_id_list[0][0]
     else:
         myask_log.error("origin destination not specified")
     origin_id = int(origin_id)    # just to be sure
@@ -491,14 +512,14 @@ def main():
     if args.destination_id: 
         destination_id = args.destination_id
     elif args.destination_name: 
-        destination_ids =  get_stoppoint(args.destination_name)
-        if len(destination_id) != 1: 
+        destination_id_list =  get_stoppoint(args.destination_name)
+        if len(destination_id_list) != 1: 
             myask_log.error("no unique stop found")
-            for alt in destination_ids:
+            for alt in destination_id_list:
                 print alt
             return
         else:
-            destination_id = destination_ids[0][0]
+            destination_id = destination_id_list[0][0]
     else:
         destination_id = 0 # code for not set
     destination_id = int(destination_id)    # just to be sure
@@ -508,7 +529,7 @@ def main():
         return
     if args.busline: busline = args.busline
     else: busline = "" 
-
+        
     if args.direction:
         if args.direction == 1: direction = "DIR_INWARD"
         elif args.direction == 2: direction = "DIR_OUTWARD"
@@ -543,6 +564,7 @@ def main():
             print "Match: " +str(match)
             for result in results:
                 print result
+            
             
 if __name__ == "__main__":
     main()
