@@ -1220,4 +1220,5 @@ BUSLINES = [
 
 CENTRAL_DESTINATIONS = [ u"Aachen Bushof", u"Schnellbus Aachen Bushof", 
                         u"Elisenbrunnen",  u"Schnellb. Elisenbrunnen"
-                        u"Aachen Kaiserplatz"]
+                        u"Kaiserplatz", u"Aachen Kaiserplatz",
+                        u"Hansemannplatz"]

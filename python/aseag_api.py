@@ -50,7 +50,6 @@ def MatchesDirection(station_ID, direction, line, destination):
     else:
         myask_log.error("Station '"+str(station_ID)+"' not found in inbound list. returning all stations")
         return True
-    busline = line
     
     if direction == "DIR_INWARD":
         # positive list: 

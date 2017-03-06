@@ -15,6 +15,7 @@ import aseag_inbound_connection
 import aseag_api
 from datetime import datetime
 from myask import myask_log
+from shutil import copyfile
 
 
 def CollectInbound(outputfile):
@@ -58,11 +59,23 @@ def CollectInbound(outputfile):
         data_str = json.dumps(inbound_line_departures, sort_keys=False, ensure_ascii=False, separators=(',',':')).encode('utf8')
         #enforce proper unicode tracking to avoid issues when re-reading
         data_str = data_str.replace('["','[u"')
-        data_str = data_str.replace('","','",u"')
+        data_str = data_str.replace('","','", u"')
         fout.write(" '"+ str(origin_id)+ "' : " +data_str  + ",\n")
     fout.write("}")
     fout.close()
     myask_log.debug(1, "Done. Added "+ str(newcounter) +" new destinations")
 
+################################################################################
+
+tmpfile = "c:/tmp/aseag_inbound_connection.py"
+target = "./aseag_inbound_connection.py"
 myask_log.SetDebugLevel(3)
-CollectInbound("c:/tmp/aseag_inbound_connection.py")
+CollectInbound(tmpfile)
+
+userinput = raw_input("Copy : '"+tmpfile+"' to '"+target+"' ? (yes/no): ")
+if userinput == "yes":
+    print "OK"
+    copyfile(tmpfile, target)
+    print "File copied"
+else:
+    print "File not copied"
