@@ -17,13 +17,13 @@ Nachdem man einmalig eine Haltestelle als bevorzugten Abfahrtspunkt festgelegt h
 können Abfahrten und Verbindungen von dieser Haltestelle besonders einfach abgefragt werden werden.
 
   - "Zeige Abfahrten ab Elisenbrunnen"
-  - "Wann färt die Linie 21 ab Elisenbrunnen"  
+  - "Wann fährt die Linie 21 ab Elisenbrunnen"  
   - "Zeige mir Verbindungen von Richterich Rathaus zum Elisenbrunnen"
 
 Nach Festlegen der bevorzugten Haltestelle mit z.B:
 "Ändere die bevorzugte haltestelle zu Technologiepark"
 geht auch:
-  - "Wann färt der nächste Bus"
+  - "Wann fährt der nächste Bus"
   - "Wann geht die Linie 34 Richtung stadteinwärts"
   
 https://github.com/acmurmeltier69/Alexa-Busauskunft
