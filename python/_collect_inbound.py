@@ -29,14 +29,19 @@ def CollectInbound(outputfile):
     for station in aseag_data.STATIONLIST:
         origin_id = int(station[0])
         orig_str = str(origin_id)
-        myask_log.debug(9, "--- Station:"+orig_str)
+        myask_log.debug(9, "--- Station: "+orig_str)
         if orig_str in existing_connections:
-            debugstr = "--- Station:"+orig_str
+            debugstr = "--- Station: "+orig_str
             inbound_line_departures = existing_connections[orig_str]
         else:
-            debugstr = "+++ Station:"+orig_str
+            debugstr = "+++ Station: "+orig_str
             inbound_line_departures = {}
         dircon = aseag_api.getDirectConnection(origin_id, 100000)
+        if len(dircon) == 0: # no direct connection to bushof, let's try kaiserplatz
+            dircon = aseag_api.getDirectConnection(origin_id, 100003)
+            if len(dircon) > 0: debugstr += "(KP):"
+            else:  debugstr += " NONE"
+        else: debugstr += "    :"
 #        dircon = []
         for con in dircon:
             dest = con['destinationName']
@@ -44,7 +49,7 @@ def CollectInbound(outputfile):
             line = con['lineName']
             if line not in inbound_line_departures: 
                 debugstr += "+"
-                myask_log.debug(5, "new: "+ str(line) + " --> " + dest)
+                myask_log.debug(3, "new: "+ str(line) + " --> " + dest)
                 inbound_line_departures[line] = [dest]
             else:
                 if dest not in inbound_line_departures[line]: 
@@ -56,7 +61,7 @@ def CollectInbound(outputfile):
                     debugstr += "." 
                     myask_log.debug(9, "old "+ str(line) + " --> " + dest)
         myask_log.debug(3, debugstr)
-        data_str = json.dumps(inbound_line_departures, sort_keys=False, ensure_ascii=False, separators=(',',':')).encode('utf8')
+        data_str = json.dumps(inbound_line_departures, sort_keys=True, ensure_ascii=False, separators=(',',':')).encode('utf8')
         #enforce proper unicode tracking to avoid issues when re-reading
         data_str = data_str.replace('["','[u"')
         data_str = data_str.replace('","','", u"')

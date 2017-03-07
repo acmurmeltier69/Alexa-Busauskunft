@@ -173,9 +173,11 @@ def get_stopdata(stop_point_id, lines, getraw=False):
         parameter['LineID'] = ",".join(lines)
     request = requests.get(baseurl.format(url_i), params = parameter)
     if request.status_code != 200:
-        raise Exception
+        myask_log.error("ASEAG API returned error code"+ str(request.status_code ))
+        return[]
     if request.headers['content-type'] != 'application/json;charset=UTF-8':
-        raise Exception
+        myask_log.error("ASEAG API returned invalid result")
+        return[]
     if getraw: 
         return  request.text
     else: 
