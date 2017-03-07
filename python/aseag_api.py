@@ -441,6 +441,8 @@ def getDirectConnection(origin_id, destination_id):
     #---------------------------------------------------------------------------
     direct_connections = []
     connections = get_routedata(origin_id, destination_id)
+    if connections == None: return []
+    
     if 'resultList' not in connections:
         return direct_connections
     for journey in connections['resultList']:

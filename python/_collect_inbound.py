@@ -26,13 +26,23 @@ def CollectInbound(outputfile):
     fout.write("#Auto-generated on " +datetime.now().strftime("%Y-%m-%d %H:%M")+"\n\n")
     fout.write("INBOUND_LINES= {\n")
     newcounter = 0
+    existingcounter = 0
+    observedcounter = 0
+    stationcounter = 0
+    nodirect_con= 0
     for station in aseag_data.STATIONLIST:
+        stationcounter +=1
         origin_id = int(station[0])
         orig_str = str(origin_id)
         myask_log.debug(9, "--- Station: "+orig_str)
         if orig_str in existing_connections:
             debugstr = "--- Station: "+orig_str
             inbound_line_departures = existing_connections[orig_str]
+            # do some statistics
+            stationlinecounter = 0
+            for lines in  inbound_line_departures:
+                stationlinecounter += len(lines)
+            existingcounter += stationlinecounter
         else:
             debugstr = "+++ Station: "+orig_str
             inbound_line_departures = {}
@@ -44,18 +54,22 @@ def CollectInbound(outputfile):
         else: debugstr += "    :"
 #        dircon = []
         for con in dircon:
+            observedcounter +=1
             dest = con['destinationName']
     #            if dest == "Aachen Bushof" : continue
             line = con['lineName']
             if line not in inbound_line_departures: 
                 debugstr += "+"
                 myask_log.debug(3, "new: "+ str(line) + " --> " + dest)
+                newcounter += 1
+                stationlinecounter += 1
                 inbound_line_departures[line] = [dest]
             else:
                 if dest not in inbound_line_departures[line]: 
                     debugstr += "+"
                     myask_log.debug(3, "new: "+ str(line) + " --> " + dest)
                     newcounter += 1
+                    stationlinecounter += 1
                     inbound_line_departures[line].append(dest)
                 else:
                     debugstr += "." 
@@ -66,9 +80,17 @@ def CollectInbound(outputfile):
         data_str = data_str.replace('["','[u"')
         data_str = data_str.replace('","','", u"')
         fout.write(" '"+ str(origin_id)+ "' : " +data_str  + ",\n")
+        # do some statistics
+        if stationlinecounter == 0: nodirect_con +=1
     fout.write("}")
     fout.close()
-    myask_log.debug(1, "Done. Added "+ str(newcounter) +" new destinations")
+    myask_log.debug(1, "-----------------------------------")
+    myask_log.debug(1, "Stations: "+ str(stationcounter)+ " ("+str(nodirect_con)+" without direction info)")
+    myask_log.debug(1, "Existing: Dest.   " + str(existingcounter) +" ")
+    myask_log.debug(1, "Observed  Dest.   " + str(observedcounter) +"  destinations found this time")
+    myask_log.debug(1, "New  Destinations " + str(newcounter) +"  destinations added")
+
+
 
 ################################################################################
 
