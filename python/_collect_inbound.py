@@ -74,7 +74,7 @@ def CollectInbound(outputfile):
                 else:
                     debugstr += "." 
                     myask_log.debug(9, "old "+ str(line) + " --> " + dest)
-        myask_log.debug(3, debugstr)
+        myask_log.debug(3, str(stationcounter)+" : "+debugstr)
         data_str = json.dumps(inbound_line_departures, sort_keys=True, ensure_ascii=False, separators=(',',':')).encode('utf8')
         #enforce proper unicode tracking to avoid issues when re-reading
         data_str = data_str.replace('["','[u"')
