@@ -3,20 +3,18 @@ Alexa Skill für Busauskunft
 
 Der Skill wurde ursprünglich geschrieben für Nahverkehr im Raum Aachen, kann aber leicht für andere Städte angepasst werden.
 
-Der Skill benutzt z.B. die ASEAG Unified realtime api (URA) (Base URL:  http://ivu.aseag.de/interfaces/ura/instant_V1)
-Siehe z.B http://content.tfl.gov.uk/tfl-live-bus-river-bus-arrivals-api-documentation.pdf
-
-Update (28.März 2017): Unverständlicherweise und ohne nähere Begründung hat die ASEAG die Verwendung der frei zugänglichen URA API untersagt. Daher kann der Skill nicht als Busauskunft für die Region Aachen veröffentlicht werden
+Update (28.März 2017): Unverständlicherweise und ohne nähere Begründung hat die ASEAG die Verwendung ihrer frei zugänglichen URA API (http://ivu.aseag.de/interfaces/ura/instant_V1) untersagt. 
+Ich bin jetzt auf der Suche nach alternativen ÖPNV APIs um den Skill zu testen.
 
 ## Requires
 Der Skill benutzt die folgenden "externen" Pakete:
--  "requests" (zur Vereinfachung der Anfragen an die ASEAG API) Siehe http://docs.python-requests.org/en/master/
+-  "requests" (zur Vereinfachung der Anfragen an die externe API) Siehe http://docs.python-requests.org/en/master/
 -  "myask"    (ein Paar kleine Helferchen, die ich für meine Alexa Skills geschrieben habe) Siehe https://github.com/acmurmeltier69/myask.git
 Diese Pakete müssen als Unterverzeichnisse eingebunden werden, wenn der Handler als aws Lambda hochgeladen wird.
 
 
 # Funktionalität
-Dieser Skill bietet Live Abfahrts- und Verbindungsinformationen für den Nahverkehr der ASEAG im Raum Aachen.
+Dieser Skill bietet Live Abfahrts- und Verbindungsinformationen für den Nahverkehr z.B. für den Raum Aachen.
 
 Sofern der Benutzer einmalig eine Haltestelle als bevorzugeten Abfahrtspunkt festgelegt hat, 
 können Abfahrten und Verbindungen von dieser Haltestelle vereinfacht abgefragt werden. 
@@ -74,7 +72,7 @@ Die Informationen die das "Interaktionsmodell" des Alexa Skills benötigt liegen
 Die entsprechenden Dateien wurden mit Hilfe des [myask](https://github.com/acmurmeltier69/myask.git) Tools *myask/myask_appdef.py* automatisch aus einem internen Datenmodell generiert:
 
  - *'python/bus_appdef.py'* definiert die Intents, Slots und Custom-Slot-Types für den Skill
-    - Die Liste der ASEAG Bushaltestellen wird dabei aus "aseag_data.py" importiert
+    - Die Liste der Bushaltestellen wird dabei aus "aseag_data.py" importiert
     - verschiedene Formulierungen ("literal values") für den selben Slot-Wert ("canonical value") werden im Datenmodell zusammengefasst.
       Die von Alexa erkannten slot-Werte werden bereits beim Einlesen (mit myask/myask_slots.py) in die entsprechenden canonicals umgewandelt.
       
