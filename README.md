@@ -5,8 +5,8 @@ Der Skill wurde ursprünglich geschrieben für Nahverkehr im Raum Aachen, kann a
 
 Demo: http://mnbvcx.eu/busplan/busauskunft_video1.mp4 
 
-Update (28.März 2017): Unverständlicherweise und ohne nähere Begründung hat die ASEAG die Verwendung ihrer frei zugänglichen URA API (http://ivu.aseag.de/interfaces/ura/instant_V1) untersagt. 
-Ich bin jetzt auf der Suche nach alternativen ÖPNV APIs um den Skill zu testen.
+Update (28.März 2017): Unverständlicherweise und ohne nähere Begründung hat die ASEAG die Verwendung ihrer frei zugänglichen URA API (http://ivu.aseag.de/interfaces/ura/instant_V1) untersagt. (siehe https://github.com/acmurmeltier69/Alexa-Busauskunft/issues/13)
+Ich bin jetzt auf der Suche nach alternativen ÖPNV APIs um den Skill für andere Verkehrssysteme zu verwenden.
 
 ## Requires
 Der Skill benutzt die folgenden "externen" Pakete:
