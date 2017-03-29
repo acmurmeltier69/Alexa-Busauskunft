@@ -1,9 +1,12 @@
 # Alexa-Busauskunft
-Alexa Skill für Busauskunft
-Geschrieben für Nahverkehr im Raum Aachen (ASEAG), kann aber leicht für andere Städte angepasst werden.
+Alexa Skill für Busauskunft 
 
-Der Skill benutzt die ASEAG Unified realtime api (URA) (Base URL:  http://ivu.aseag.de/interfaces/ura/instant_V1)
+Der Skill wurde ursprünglich geschrieben für Nahverkehr im Raum Aachen, kann aber leicht für andere Städte angepasst werden.
+
+Der Skill benutzt z.B. die ASEAG Unified realtime api (URA) (Base URL:  http://ivu.aseag.de/interfaces/ura/instant_V1)
 Siehe z.B http://content.tfl.gov.uk/tfl-live-bus-river-bus-arrivals-api-documentation.pdf
+
+Update (28.März 2017): Unverständlicherweise und ohne nähere Begründung hat die ASEAG die Verwendung der frei zugänglichen URA API untersagt. Daher kann der Skill nicht als Busauskunft für die Region Aachen veröffentlicht werden
 
 ## Requires
 Der Skill benutzt die folgenden "externen" Pakete:
